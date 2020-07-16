@@ -14,64 +14,44 @@
 # External storage: None
 #############
 import PySimpleGUI as sg
+import yaml
 
 from LoginUI import Login, MessageBox
 from FinancialUI import Financial
 from PackingUI import Packing
 from AdminUI import Admin
+from ClientPageUI import Client
+from NewUserPageUI import NewUser
 
 # instantiate UI objects
 login_ui = Login()
 financial_ui = Financial()
 packing_ui = Packing()
 admin_ui = Admin()
+client_ui = Client()
+new_user_ui = NewUser()
 mg = MessageBox()
 
 # instantiate window object
 
 
 login = sg.Window("IPLMS - Login", login_ui.get_layout(), auto_size_buttons=False,
-                  background_color="white", no_titlebar=True, grab_anywhere=True, size=(1, 1), use_default_focus=True)
+                  background_color="white", no_titlebar=True, grab_anywhere=True, size=(300, 300), use_default_focus=True)
 
-
-def financial_thread():
-    financial = sg.Window("IPLMS - Invoice Generator", financial_ui.get_layout(), auto_size_buttons=False,
-                          finalize=True,
-                          background_color="white")
-    event3, values3 = financial.read()
-    while event3 is not None:
-        event3, values3 = financial.read()
-    login.close()
-    financial.close()
-
-
-def packing_thread():
-    packing = sg.Window("IPLMS - Invoice Generator", packing_ui.get_layout(), auto_size_buttons=False, finalize=True,
-                        background_color="white")
-    event2, values2 = packing.read()
-    while event2 is not None:
-        event2, values2 = packing.read()
-    login.close()
-    packing.close()
-
-
-def admin_thread():
-    admin = sg.Window("Invoice and Packing List Management System", admin_ui.get_layout(), auto_size_buttons=False,
-                      finalize=True, background_color="white")
-    admin.hide()
-
+client = sg.Window("IPLMS", client_ui.get_layout(), auto_size_buttons=False,
+                               finalize=True,
+                               background_color="white", no_titlebar=True)
+client.hide()
 
 # Main loop for the Gui window
 while True:
 
-    event, values = login.read(timeout=10)
+    event, values = login.read(timeout=300)
 
     if values["_USERNAME_"] != "":
-        login.FindElement("_USERNAME_")
+        login.grab_any_where_off()
     else:
         login.grab_any_where_on()
-
-    event, values = login.read(timeout=300)
 
     print(event, values)
 
@@ -82,43 +62,69 @@ while True:
                 financial = sg.Window("IPLMS - Invoice Generator", financial_ui.get_layout(), auto_size_buttons=False,
                                       finalize=True,
                                       background_color="white")
-                event3, values3 = financial.read()
-                print(event3, values3)
+                event3= ""
                 while event3 is not None:
-                    event3, values3 = financial.read()
+                    event3, values3 = financial.read(timeout=300)
                     print(event3, values3)
+                    if event3 == "_PL_NEW_BTN_":
+                        client.un_hide()
+                        event4, values4 = client.read()
+                        print(event4, values4)
+                        if event4 == "_CP_SAVE_BTN_":
+                            client.hide()
+                        elif event4 == "_CP_CANCEL_BTN":
+                            client.hide()
+                    elif event3 == "_FA_QUIT_BTN_" or event3 is None:
+                        break
                 print(event3, values3)
-                login.close()
                 financial.close()
                 break
             elif "2" in values.values():
                 packing = sg.Window("IPLMS - Invoice Generator", packing_ui.get_layout(), auto_size_buttons=False,
                                     finalize=True,
                                     background_color="white")
-                event2, values2 = packing.read()
-                print(event2, values2)
+                event2 = ""
                 while event2 is not None:
                     event2, values2 = packing.read()
                     print(event2, values2)
+                    if event2 == "_PL_NEW_BTN_":
+                        client.un_hide()
+                        event4, values4 = client.read()
+                        print(event4, values4)
+                        if event4 == "_CP_SAVE_BTN_":
+                            client.hide()
+                        elif event4 == "_CP_CANCEL_BTN":
+                            client.hide()
+                    elif event2 == "_PL_QUIT_BTN_" or event2 is None:
+                        break
                 print(event2, values2)
-                login.close()
                 packing.close()
                 break
             else:
                 admin = sg.Window("Invoice and Packing List Management System", admin_ui.get_layout(),
                                   auto_size_buttons=False,
                                   finalize=True, background_color="white")
-                event4, values4 = admin.read()
-                print(event4, values4)
-                while event4 is not None:
-                    event4, values4 = admin.read()
-                    print(event4, values4)
-                print(event4, values4)
-                login.close()
+                new_user = sg.Window("IPLMS", new_user_ui.get_layout(), auto_size_buttons=False,
+                                     finalize=True,
+                                     background_color="white", no_titlebar=True)
+                new_user.hide()
+                event5 = ""
+                while event5 is not None:
+                    event5, values5 = admin.read()
+                    print(event5, values5)
+                    if event5 == "_AD_UGM_BTN_":
+                        new_user.un_hide()
+                        event6, values6 = new_user.read()
+                        print(event6, values6)
+                        if event6 == "_NU_CANCEL_BTN":
+                            new_user.hide()
+                        elif event6 == "_NU_CREATE_BTN_":
+                            new_user.hide()
+                print(event5, values5)
                 admin.close()
                 break
     # "X" on the windows top was pressed
-    else:
+    elif event == "_LG_CROSS_":
         break
 
 login.close()
