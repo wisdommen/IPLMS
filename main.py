@@ -22,6 +22,7 @@ from PackingUI import Packing
 from AdminUI import Admin
 from ClientPageUI import Client
 from NewUserPageUI import NewUser
+from UserManagePageUI import UserMange
 
 # instantiate UI objects
 login_ui = Login()
@@ -30,6 +31,7 @@ packing_ui = Packing()
 admin_ui = Admin()
 client_ui = Client()
 new_user_ui = NewUser()
+user_manage_ui = UserMange()
 mg = MessageBox()
 
 # instantiate window object
@@ -40,7 +42,7 @@ login = sg.Window("IPLMS - Login", login_ui.get_layout(), auto_size_buttons=Fals
 
 client = sg.Window("IPLMS", client_ui.get_layout(), auto_size_buttons=False,
                                finalize=True,
-                               background_color="white", no_titlebar=True)
+                               background_color="white", disable_close=True)
 client.hide()
 
 # Main loop for the Gui window
@@ -106,20 +108,45 @@ while True:
                                   finalize=True, background_color="white")
                 new_user = sg.Window("IPLMS", new_user_ui.get_layout(), auto_size_buttons=False,
                                      finalize=True,
-                                     background_color="white", no_titlebar=True)
+                                     background_color="white", disable_close=True)
                 new_user.hide()
+                user_manage = sg.Window("IPLMS", user_manage_ui.get_layout(), auto_size_buttons=False,
+                                        finalize=True,
+                                        background_color="white", disable_close=True)
+                user_manage.hide()
+                admin.bring_to_front()
                 event5 = ""
                 while event5 is not None:
-                    event5, values5 = admin.read()
+                    event5, values5 = admin.read(timeout=200)
                     print(event5, values5)
                     if event5 == "_AD_UGM_BTN_":
-                        new_user.un_hide()
-                        event6, values6 = new_user.read()
-                        print(event6, values6)
-                        if event6 == "_NU_CANCEL_BTN":
-                            new_user.hide()
-                        elif event6 == "_NU_CREATE_BTN_":
-                            new_user.hide()
+                        user_manage.un_hide()
+                        event6 = ""
+                        while event6 is not None:
+                            event6, values6 = user_manage.read()
+                            print(event6, values6)
+
+                            if event6 == "_UM_SAVE_BTN_":
+                                user_manage.hide()
+                                break
+                            elif event6 == "_UM_QUIT_BTN_":
+                                user_manage.hide()
+                                break
+                            elif event6 == "_UM_CREATE_BTN_":
+                                new_user.un_hide()
+                                new_user.bring_to_front()
+                                event7, values7 = new_user.read()
+                                print(event7, values7)
+                                if event7 == "_NU_CREATE_BTN_":
+                                    new_user.hide()
+                                elif event7 == "_NU_CANCEL_BTN":
+                                    new_user.hide()
+                    elif event5 == "_AD_QUIT_BTN_":
+                        admin.close()
+                        user_manage.close()
+                        new_user.close()
+                        client.close()
+
                 print(event5, values5)
                 admin.close()
                 break
