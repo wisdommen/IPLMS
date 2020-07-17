@@ -20,11 +20,11 @@ class NewUser(object):
         ]
 
         column1 = [
-            [sg.Text("Group Name:", font=("arial", 10), background_color="white", text_color="black"),sg.InputText(key="_NU_PHONE_IP_", size=(25, 1), enable_events=True)]
+            [sg.Text("Group Name:", font=("arial", 10), background_color="white", text_color="black"),sg.InputText(key="_NU_PHONE_IP_", size=(25, 1))]
         ]
 
         column2 = [
-            [sg.Text("Password: ",font=("arial", 10), background_color="white", text_color="black"),sg.InputText(key="_NU_NAME_IP_", size=(25, 1), enable_events=True)]
+            [sg.Text("Password: ",font=("arial", 10), background_color="white", text_color="black"),sg.InputText(key="_NU_NAME_IP_", size=(25, 1))]
         ]
 
         buttons = [

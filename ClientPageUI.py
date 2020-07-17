@@ -26,9 +26,9 @@ class Client(object):
         ]
 
         column2 = [
-            [sg.InputText(key="_CP_PHONE_IP_", size=(25, 1), enable_events=True)],
-            [sg.InputText(key="_CP_NAME_IP_", size=(25, 1), enable_events=True)],
-            [sg.InputText(key="_CP_ADDRESS_IP_", password_char="*", size=(25, 1), enable_events=True)]
+            [sg.InputText(key="_CP_PHONE_IP_", size=(25, 1))],
+            [sg.InputText(key="_CP_NAME_IP_", size=(25, 1))],
+            [sg.InputText(key="_CP_ADDRESS_IP_", size=(25, 1))]
         ]
 
         buttons = [
