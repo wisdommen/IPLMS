@@ -1,0 +1,6 @@
+database: IPLMS
+enable_database: false
+ip: localhost
+password: root
+port: 3306
+username: root

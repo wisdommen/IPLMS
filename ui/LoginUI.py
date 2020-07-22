@@ -1,13 +1,13 @@
 import PySimpleGUI as sg
 
+from ui.UI import UI
+
 """
 Summary: This class is the main body layout of the GUI
 """
 
 
-class Login(object):
-    # private element, shouldn't be changed from outside
-    _layout = []
+class Login(UI):
 
     # initiate the layout
     def __init__(self):
@@ -15,16 +15,16 @@ class Login(object):
         cross_ioc_base64 = b"R0lGODlhEAAQAHAAACwAAAAAEAAQAIT/////bW3/trb/Skr/AAD/AgL/mpr/cXH/BQX/oaH/u7v/AQH/qqr/Cgr/lZX/p6f/BAT/tbX/nJz/sLD/AwMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFUSAABIpomkpgDgRhnKLRDsDRtq8p34dytwwR40coDX+G3S0oJBKZKGerBAMob7nqFVcFHJ3QmHRp+uK2L9+Pqr6lfmGzikUINwk0Ua8LUBxEIQA7"
 
         title = [
-            [sg.Text("WELCOME", font=("Helvetica", 15), size=(10, 1), background_color="white",
+            [sg.Text("WELCOME", font=("Helvetica", 15), size=(10, 1), background_color="light gray",
                      text_color="red", justification="center")]
         ]
 
         column1 = [
-            [sg.Text("Username:", font=("arial", 10), background_color="white", text_color="black"),sg.InputText(key="_USERNAME_", size=(25, 1), enable_events=True)]
+            [sg.Text("Username:", font=("arial", 10), background_color="light gray", text_color="black"),sg.InputText(key="_USERNAME_", size=(25, 1), enable_events=True)]
         ]
 
         column2 = [
-            [sg.Text("Password: ",font=("arial", 10), background_color="white", text_color="black"),sg.InputText(key="_PASSWORD_", password_char="*", size=(25, 1), enable_events=True)]
+            [sg.Text("Password: ",font=("arial", 10), background_color="light gray", text_color="black"),sg.InputText(key="_PASSWORD_", password_char="*", size=(25, 1), enable_events=True)]
         ]
 
         buttons = [
@@ -37,21 +37,16 @@ class Login(object):
         ]
 
         column_all = [
-            [sg.Column(title, background_color="white", key="_TITLE_COLUMN_",  justification="center")],
-            [sg.Column(column1, background_color="white", key="_NAME_COLUMN_",pad=(10,10), justification="center")],
-            [sg.Column(column2, background_color="white", key="_DATE_COLUMN_",pad=(10,10), justification="center")],
-            [sg.Column(buttons, pad=(10, 20), background_color="white", justification="center")],
+            [sg.Column(title, background_color="light gray", key="_TITLE_COLUMN_",  justification="center")],
+            [sg.Column(column1, background_color="light gray", key="_NAME_COLUMN_",pad=(10,10), justification="center")],
+            [sg.Column(column2, background_color="light gray", key="_DATE_COLUMN_",pad=(10,10), justification="center")],
+            [sg.Column(buttons, pad=(10, 20), background_color="light gray", justification="center")],
         ]
 
         self._layout = [
-            [sg.Column(column_cross, background_color="white", justification="right")],
-            [sg.Column(column_all, pad=(20, 10), background_color="white", justification="center")]
+            [sg.Column(column_cross, background_color="light gray", justification="right")],
+            [sg.Column(column_all, pad=(20, 10), background_color="light gray", justification="center")]
         ]
-
-    # outside method can get the layout by this method
-    def get_layout(self):
-        return self._layout
-
 
 """
 Summary: Show message boxes

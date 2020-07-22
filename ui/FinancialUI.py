@@ -1,14 +1,13 @@
 import PySimpleGUI as sg
 
+from ui.UI import UI
+
 """
 Summary: This class is the main body layout of the GUI
 """
 
 
-class Financial(object):
-    # private element, shouldn't be changed from outside
-    _layout = []
-
+class Financial(UI):
     # initiate the layout
     def __init__(self):
         new_client_ioc = b"R0lGODlhFwAVAHAAACwAAAAAFwAVAIH///8AqPMAAAAAAAACPYQfmcfdCp00sM5X7aU5btB5W6h8IBlwi0MiJbN0oJq6cVSK2fieLQpMBVG+4c4YwqyKwKIt6KQ1dcYooAAAOw=="
@@ -62,6 +61,3 @@ class Financial(object):
             [sg.Column(column_all, pad=(10, 10), background_color="white")]
         ]
 
-    # outside method can get the layout by this method
-    def get_layout(self):
-        return self._layout

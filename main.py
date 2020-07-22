@@ -13,148 +13,130 @@
 # Internal storage: Memory, Hard drive
 # External storage: None
 #############
+from main.MainApplication import MainApplication
+
 import PySimpleGUI as sg
-import yaml
 
-from LoginUI import Login, MessageBox
-from FinancialUI import Financial
-from PackingUI import Packing
-from AdminUI import Admin
-from ClientPageUI import Client
-from NewUserPageUI import NewUser
-from UserManagePageUI import UserMange
-
-# instantiate UI objects
-login_ui = Login()
-financial_ui = Financial()
-packing_ui = Packing()
-admin_ui = Admin()
-client_ui = Client()
-new_user_ui = NewUser()
-user_manage_ui = UserMange()
-mg = MessageBox()
-
-# instantiate window object
+from utils import Config
 
 
-login = sg.Window("IPLMS - Login", login_ui.get_layout(), auto_size_buttons=False,
-                  background_color="white", no_titlebar=True, grab_anywhere=True, size=(300, 300), use_default_focus=True)
+class main(MainApplication):
 
-client = sg.Window("IPLMS", client_ui.get_layout(), auto_size_buttons=False,
-                               finalize=True,
-                               background_color="white", disable_close=True)
-client.hide()
+    def on_enable(self):
 
-# Main loop for the Gui window
-while True:
+        # load config, if no config found, create a new one
+        if not Config.is_config_exists():
+            Config.save_default_config()
+        config = Config.get_config()
 
-    event, values = login.read(timeout=300)
+        # if use database (developing)
+        if config["enable_database"]=="":
+            pass
 
-    if values["_USERNAME_"] != "":
-        login.grab_any_where_off()
-    else:
-        login.grab_any_where_on()
+        # set up login page
+        login = sg.Window("IPLMS - Login", self.login_ui.get_layout(), auto_size_buttons=False, background_color="lightgray",
+                          no_titlebar=True, grab_anywhere=True, size=(300, 300), use_default_focus=True, border_depth=1)
+        self.windows_map["login"] = login
 
-    print(event, values)
+        while True:
+            event, values = login.read(timeout=300)
 
-    if event != "_LG_CROSS_":
-        if event == "_LOGIN_":
-            login.hide()
-            if "1" in values.values():
-                financial = sg.Window("IPLMS - Invoice Generator", financial_ui.get_layout(), auto_size_buttons=False,
-                                      finalize=True,
-                                      background_color="white")
-                event3= ""
-                while event3 is not None:
-                    event3, values3 = financial.read(timeout=300)
-                    print(event3, values3)
-                    if event3 == "_PL_NEW_BTN_":
-                        client.un_hide()
-                        event4, values4 = client.read()
-                        print(event4, values4)
-                        if event4 == "_CP_SAVE_BTN_":
-                            client.hide()
-                        elif event4 == "_CP_CANCEL_BTN":
-                            client.hide()
-                    elif event3 == "_FA_QUIT_BTN_" or event3 is None:
-                        break
-                print(event3, values3)
-                financial.close()
-                break
-            elif "2" in values.values():
-                packing = sg.Window("IPLMS - Invoice Generator", packing_ui.get_layout(), auto_size_buttons=False,
-                                    finalize=True,
-                                    background_color="white")
-                event2 = ""
-                while event2 is not None:
-                    event2, values2 = packing.read()
-                    print(event2, values2)
-                    if event2 == "_PL_NEW_BTN_":
-                        client.un_hide()
-                        event4, values4 = client.read()
-                        print(event4, values4)
-                        if event4 == "_CP_SAVE_BTN_":
-                            client.hide()
-                        elif event4 == "_CP_CANCEL_BTN":
-                            client.hide()
-                    elif event2 == "_PL_QUIT_BTN_" or event2 is None:
-                        break
-                print(event2, values2)
-                packing.close()
-                break
+            if values["_USERNAME_"] != "":
+                login.grab_any_where_off()
             else:
-                admin = sg.Window("Invoice and Packing List Management System", admin_ui.get_layout(),
-                                  auto_size_buttons=False,
-                                  finalize=True, background_color="white")
-                new_user = sg.Window("IPLMS", new_user_ui.get_layout(), auto_size_buttons=False,
-                                     finalize=True,
-                                     background_color="white", disable_close=True)
-                new_user.hide()
-                user_manage = sg.Window("IPLMS", user_manage_ui.get_layout(), auto_size_buttons=False,
-                                        finalize=True,
-                                        background_color="white", disable_close=True)
-                user_manage.hide()
-                admin.bring_to_front()
-                event5 = ""
-                while event5 is not None:
-                    event5, values5 = admin.read(timeout=200)
-                    print(event5, values5)
-                    if event5 == "_AD_UGM_BTN_":
-                        user_manage.un_hide()
-                        event6 = ""
-                        while event6 is not None:
-                            event6, values6 = user_manage.read()
-                            print(event6, values6)
+                login.grab_any_where_on()
 
-                            if event6 == "_UM_SAVE_BTN_":
-                                user_manage.hide()
+            print(event, values)
+
+            if event != "_LG_CROSS_":
+                if event == "_LOGIN_":
+                    login.hide()
+                    if "1" in values.values():
+                        financial = self.create_window("financial","IPLMS - Invoice Generator", self.financial_ui.get_layout())
+                        event3 = ""
+                        while event3 is not None:
+                            event3, values3 = financial.read(timeout=300)
+                            print(event3, values3)
+                            if event3 == "_PL_NEW_BTN_":
+                                client = self.create_window("client","IPLMS", self.client_ui.get_layout(), disable_close=True)
+                                event4, values4 = client.read()
+                                print(event4, values4)
+                                if event4 == "_CP_SAVE_BTN_":
+                                    client.hide()
+                                elif event4 == "_CP_CANCEL_BTN":
+                                    client.hide()
+                            elif event3 == "_FA_QUIT_BTN_" or event3 is None:
                                 break
-                            elif event6 == "_UM_QUIT_BTN_":
-                                user_manage.hide()
+                        print(event3, values3)
+                        financial.close()
+                        break
+                    elif "2" in values.values():
+                        packing = self.create_window("packing","IPLMS - Packing List Generator", self.packing_ui.get_layout())
+                        event2 = ""
+                        while event2 is not None:
+                            event2, values2 = packing.read()
+                            print(event2, values2)
+                            if event2 == "_PL_NEW_BTN_":
+                                client = self.create_window("client","IPLMS", self.client_ui.get_layout(), disable_close=True)
+                                event4, values4 = client.read()
+                                print(event4, values4)
+                                if event4 == "_CP_SAVE_BTN_":
+                                    client.hide()
+                                elif event4 == "_CP_CANCEL_BTN":
+                                    client.hide()
+                            elif event2 == "_PL_QUIT_BTN_" or event2 is None:
                                 break
-                            elif event6 == "_UM_CREATE_BTN_":
-                                new_user.un_hide()
-                                new_user.bring_to_front()
-                                event7, values7 = new_user.read()
-                                print(event7, values7)
-                                if event7 == "_NU_CREATE_BTN_":
-                                    new_user.hide()
-                                elif event7 == "_NU_CANCEL_BTN":
-                                    new_user.hide()
-                    elif event5 == "_AD_QUIT_BTN_":
+                        print(event2, values2)
+                        packing.close()
+                        break
+                    else:
+                        admin = self.create_window("admin", "Invoice and Packing List Management System", self.admin_ui.get_layout())
+                        event5 = ""
+                        while event5 is not None:
+                            event5, values5 = admin.read(timeout=200)
+                            print(event5, values5)
+                            if event5 == "_AD_UGM_BTN_":
+                                user_manage = self.create_window("user_manage", "IPLMS", self.user_manage_ui.get_layout(), disable_close=True)
+                                event6 = ""
+                                while event6 is not None:
+                                    event6, values6 = user_manage.read()
+                                    print(event6, values6)
+
+                                    if event6 == "_UM_SAVE_BTN_":
+                                        user_manage.hide()
+                                        break
+                                    elif event6 == "_UM_QUIT_BTN_":
+                                        user_manage.hide()
+                                        break
+                                    elif event6 == "_UM_CREATE_BTN_":
+                                        new_user = self.create_window("new_user", "IPLMS", self.new_user_ui.get_layout(), disable_close=True)
+                                        new_user.bring_to_front()
+                                        event7, values7 = new_user.read()
+                                        print(event7, values7)
+                                        if event7 == "_NU_CREATE_BTN_":
+                                            new_user.hide()
+                                        elif event7 == "_NU_CANCEL_BTN":
+                                            new_user.hide()
+                            elif event5 == "_AD_QUIT_BTN_":
+                                break
+
+                        print(event5, values5)
                         admin.close()
-                        user_manage.close()
-                        new_user.close()
-                        client.close()
-
-                print(event5, values5)
-                admin.close()
+                        break
+            # "X" on the windows top was pressed
+            elif event == "_LG_CROSS_":
                 break
-    # "X" on the windows top was pressed
-    elif event == "_LG_CROSS_":
-        break
 
-login.close()
+    def on_disable(self):
+        for each in self.windows_map.keys():
+            window = self.windows_map[each]
+            window.close()
+
+
+if __name__ == "__main__":
+    main = main()
+    main.on_enable()
+    main.on_disable()
 
 ##############
 # JUSTIFICATION

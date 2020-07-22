@@ -1,13 +1,13 @@
 import PySimpleGUI as sg
 
+from ui.UI import UI
+
 """
 Summary: This class is the main body layout of the GUI
 """
 
 
-class Admin(object):
-    # private element, shouldn't be changed from outside
-    _layout = []
+class Admin(UI):
 
     # initiate the layout
     def __init__(self):
@@ -37,6 +37,3 @@ class Admin(object):
             [sg.Column(column_all, pad=(20, 10), background_color="white")]
         ]
 
-    # outside method can get the layout by this method
-    def get_layout(self):
-        return self._layout

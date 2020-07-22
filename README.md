@@ -14,7 +14,7 @@ PysimpleGUI就是个憨憨，要不是要交作业，我铁用PyQt 5。
 
 ###已知可能的错误：
 
-1. Can't recoganize the image file（我在我MacBook上就是这个错误，我把图片都转成Base64了，我真就搞不懂了，讲道理不应该报错的）
+1. Can't recognize the image file（我在我MacBook上就是这个错误，我把图片都转成Base64了，我真就搞不懂了，讲道理不应该报错的）
 2. 等你加了，我看好你（不是
 
 如果你也遇到了上面所说的问题，呵呵，先百度，运气好你就能过，运气不好，那也没办法对吧，都知道疑难杂症最难整。（狗头滑稽）
@@ -31,10 +31,10 @@ Login page -> click login = enter Admin Page
 
 You may meet any error, that is not what I can control, it works 1000% good in my environment. 
 This is very common.
-Please do some researches before contect me.
+Please do some researches before contact me.
 
-###Known expections:
-1. Can't recoganize the image file
+###Known exceptions:
+1. Can't recognize the image file
 2. ...
 
 If you meet any problem like above, do Google first, then good luck! =)

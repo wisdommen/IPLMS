@@ -1,11 +1,13 @@
 import PySimpleGUI as sg
 
+from ui.UI import UI
+
 """
 Summary: This class is the main body layout of the GUI
 """
 
 
-class UserMange(object):
+class UserMange(UI):
     # private element, shouldn't be changed from outside
     _layout = []
 
@@ -17,12 +19,14 @@ class UserMange(object):
         ]
 
         column1 = [
-            [sg.Listbox(values=["value1", "value2", "value3"],size=(50, 15), enable_events=True, key='_AD_RST_LST_')]
+            [sg.Listbox(values=["value1", "value2", "value3"], size=(50, 15), enable_events=True, key='_AD_RST_LST_')]
         ]
 
         buttons = [
-            [sg.Button("Create a new user group", pad=(30, 10), size=(47, 1), button_color=("black", "light gray"),key="_UM_CREATE_BTN_")],
-            [sg.Button("Save", pad=(30, 10), size=(20, 1), button_color=("black", "light gray"), key="_UM_SAVE_BTN_"), sg.Button("Quit", pad=(20,1),size=(20, 1), button_color=("black", "light gray"), key="_UM_QUIT_BTN_")]
+            [sg.Button("Create a new user group", pad=(30, 10), size=(47, 1), button_color=("black", "light gray"),
+                       key="_UM_CREATE_BTN_")],
+            [sg.Button("Save", pad=(30, 10), size=(20, 1), button_color=("black", "light gray"), key="_UM_SAVE_BTN_"),
+             sg.Button("Quit", pad=(20, 1), size=(20, 1), button_color=("black", "light gray"), key="_UM_QUIT_BTN_")]
         ]
 
         column_all = [
