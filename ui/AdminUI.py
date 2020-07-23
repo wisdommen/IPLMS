@@ -23,13 +23,20 @@ class Admin(UI):
             [sg.Listbox(values=["value1", "value2", "value3"],size=(50, 15), enable_events=True, key='_AD_RST_LST_')]
         ]
 
+        buttons2 = [
+            [sg.Button("Open", pad=(10, 1), size=(10, 1), button_color=("black", "light gray"), key="_AD_OPEN_BTN_"),
+             sg.Button("Edit", pad=(10, 1), size=(10, 1), button_color=("black", "light gray"), key="_AD_EDIT_BTN_"),
+             sg.Button("Delete", pad=(10, 1), size=(10, 1), button_color=("black", "light gray"), key="_AD_DEL_BTN_")]
+        ]
+
         buttons = [
-            [sg.Button("User Group Management", pad=(30, 1), size=(20, 1), button_color=("black", "light gray"), key="_AD_UGM_BTN_"), sg.Button("Quit", pad=(20,1),size=(20, 1), button_color=("black", "light gray"), key="_AD_QUIT_BTN_")]
+            [sg.Button("User Group Management", pad=(20, 1), size=(20, 1), button_color=("black", "light gray"), key="_AD_UGM_BTN_"), sg.Button("Quit", pad=(20,1),size=(20, 1), button_color=("black", "light gray"), key="_AD_QUIT_BTN_")]
         ]
 
         column_all = [
             [sg.Column(title, background_color="white", key="_AD_TITL_", justification="center")],
             [sg.Column(column1, background_color="white", key="_AD_COLUMN_1_", justification="center")],
+            [sg.Column(buttons2, pad=(10, 10), background_color="white", justification="center")],
             [sg.Column(buttons, pad=(10, 50), background_color="white", justification="center")],
         ]
 

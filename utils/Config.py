@@ -1,7 +1,12 @@
 import os
 from threading import Thread
 
-import yaml
+try:
+    import yaml
+except ModuleNotFoundError:
+    print("WARNING! No module found, start installing the required module...")
+    os.system("pip3 install PyYaml")
+    import yaml
 
 
 def is_config_exists():

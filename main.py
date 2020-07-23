@@ -18,7 +18,6 @@ from main.MainApplication import MainApplication
 import PySimpleGUI as sg
 
 from utils import Config
-from utils.logger import log
 
 
 class main(MainApplication):
@@ -69,7 +68,6 @@ class main(MainApplication):
                             elif event3 == "_FA_QUIT_BTN_" or event3 is None:
                                 break
                         print(event3, values3)
-                        financial.close()
                         break
                     elif "2" in values.values():
                         packing = self.create_window("packing","IPLMS - Packing List Generator", self.packing_ui.get_layout())
@@ -88,7 +86,6 @@ class main(MainApplication):
                             elif event2 == "_PL_QUIT_BTN_" or event2 is None:
                                 break
                         print(event2, values2)
-                        packing.hide()
                         break
                     else:
                         admin = self.create_window("admin", "Invoice and Packing List Management System", self.admin_ui.get_layout())
@@ -122,7 +119,6 @@ class main(MainApplication):
                                 break
 
                         print(event5, values5)
-                        admin.hide()
                         break
             # "X" on the windows top was pressed
             elif event == "_LG_CROSS_":
