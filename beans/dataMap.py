@@ -26,5 +26,5 @@ class DataMap(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def save_data(self):
+    def save_data(self, data_list):
         pass

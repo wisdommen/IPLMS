@@ -15,6 +15,18 @@ from ui.NewUserPageUI import NewUser
 from ui.UserManagePageUI import UserMange
 
 
+def init_data(data_type_list):
+    data = {}
+    for data_type in data_type_list:
+        try:
+            data_obj = data_type.get_data()
+        except FileNotFoundError:
+            data_type.init_file()
+            data_obj = data_type.get_data()
+        data[data_type] = data_obj
+    return data
+
+
 class MainApplication(metaclass=ABCMeta):
     # instantiate UI objects
     login_ui = Login()
@@ -30,23 +42,11 @@ class MainApplication(metaclass=ABCMeta):
     user_data_obj = UserData()
     client_data_obj = ClientData()
     pck_inv_data_obj = PackingInvoiceData()
-    try:
-        user_data = user_data_obj.get_data()
-    except FileNotFoundError:
-        user_data_obj.init_file()
-        user_data = user_data_obj.get_data()
-    try:
-        client_data = client_data_obj.get_data()
-    except FileNotFoundError:
-        client_data_obj.init_file()
-        client_data = client_data_obj.get_data()
-    try:
-        pck_inv_data = pck_inv_data_obj.get_data()
-    except FileNotFoundError:
-        pck_inv_data_obj.init_file()
-        pck_inv_data = pck_inv_data_obj.get_data()
 
-    print(user_data, client_data, pck_inv_data)
+    data = init_data([user_data_obj, client_data_obj, pck_inv_data_obj])
+
+    for each in data.keys():
+        print(data[each])
 
     windows_map = {}
 

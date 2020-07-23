@@ -18,6 +18,7 @@ from main.MainApplication import MainApplication
 import PySimpleGUI as sg
 
 from utils import Config
+from utils.logger import log
 
 
 class main(MainApplication):
@@ -87,7 +88,7 @@ class main(MainApplication):
                             elif event2 == "_PL_QUIT_BTN_" or event2 is None:
                                 break
                         print(event2, values2)
-                        packing.close()
+                        packing.hide()
                         break
                     else:
                         admin = self.create_window("admin", "Invoice and Packing List Management System", self.admin_ui.get_layout())
@@ -121,13 +122,16 @@ class main(MainApplication):
                                 break
 
                         print(event5, values5)
-                        admin.close()
+                        admin.hide()
                         break
             # "X" on the windows top was pressed
             elif event == "_LG_CROSS_":
                 break
 
     def on_disable(self):
+        for each_data in self.data.keys():
+            if each_data.save_data(self.data[each_data]) is False:
+                print("Permission error")
         for each in self.windows_map.keys():
             window = self.windows_map[each]
             window.close()
