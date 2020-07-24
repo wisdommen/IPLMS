@@ -18,10 +18,6 @@ class DataMap(metaclass=ABCMeta):
             os.makedirs(os.getcwd() + "\\database")
 
     @abstractmethod
-    def get_data(self):
-        pass
-
-    @abstractmethod
     def init_file(self):
         pass
 

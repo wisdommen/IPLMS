@@ -5,12 +5,11 @@ from utils.csvFileReader import read_csv_file
 
 
 class ClientData(DataMap):
+
     def __init__(self):
         self.file_name = "ClientData.csv"
         self.header = ["Client ID", "Client Name", "Client Phone Number", "Client Address"]
-
-    def get_data(self):
-        return read_csv_file(self.file_name, self.header, self.get_file_path(self.file_name))
+        self.data_map = read_csv_file(self.file_name, self.header, self.get_file_path(self.file_name))
 
     def init_file(self):
         try:

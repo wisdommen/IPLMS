@@ -9,9 +9,7 @@ class UserData(DataMap):
     def __init__(self):
         self.file_name = "UserData.csv"
         self.header = ["department", "username", "password", "is_blocked"]
-
-    def get_data(self):
-        return read_csv_file(self.file_name, self.header, self.get_file_path(self.file_name))
+        self.data_map = read_csv_file(self.file_name, self.header, self.get_file_path(self.file_name))
 
     def init_file(self):
         DataMap.make_dirs()

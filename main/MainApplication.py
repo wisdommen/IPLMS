@@ -19,10 +19,10 @@ def init_data(data_type_list):
     data = {}
     for data_type in data_type_list:
         try:
-            data_obj = data_type.get_data()
+            data_obj = data_type.data_map
         except FileNotFoundError:
             data_type.init_file()
-            data_obj = data_type.get_data()
+            data_obj = data_type.data_map
         data[data_type] = data_obj
     return data
 
@@ -46,6 +46,7 @@ class MainApplication(metaclass=ABCMeta):
     data = init_data([user_data_obj, client_data_obj, pck_inv_data_obj])
 
     for each in data.keys():
+        print(each)
         print(data[each])
 
     windows_map = {}
