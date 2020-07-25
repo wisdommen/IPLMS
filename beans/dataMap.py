@@ -10,12 +10,12 @@ class DataMap(metaclass=ABCMeta):
 
     @staticmethod
     def get_file_path(file_name):
-        return os.getcwd() + "\\database\\" + file_name
+        return os.getcwd() + "/database/" + file_name
 
     @staticmethod
     def make_dirs():
-        if not os.path.exists(os.getcwd() + "\\database"):
-            os.makedirs(os.getcwd() + "\\database")
+        if not os.path.exists(os.getcwd() + "/database"):
+            os.makedirs(os.getcwd() + "/database")
 
     @abstractmethod
     def init_file(self):

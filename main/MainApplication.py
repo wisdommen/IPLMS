@@ -14,17 +14,17 @@ from ui.ClientPageUI import Client
 from ui.NewUserPageUI import NewUser
 from ui.UserManagePageUI import UserMange
 
+from concurrent.futures import ThreadPoolExecutor
 
-def init_data(data_type_list):
-    data = {}
-    for data_type in data_type_list:
-        try:
-            data_obj = data_type.data_map
-        except FileNotFoundError:
-            data_type.init_file()
-            data_obj = data_type.data_map
-        data[data_type] = data_obj
-    return data
+
+def init_data(data_type):
+    data_type.init_data()
+    try:
+        data_obj = data_type.data_map
+    except FileNotFoundError:
+        data_type.init_file()
+        data_obj = data_type.data_map
+    return data_obj
 
 
 class MainApplication(metaclass=ABCMeta):
@@ -43,7 +43,17 @@ class MainApplication(metaclass=ABCMeta):
     client_data_obj = ClientData()
     pck_inv_data_obj = PackingInvoiceData()
 
-    data = init_data([user_data_obj, client_data_obj, pck_inv_data_obj])
+    data_pre = [user_data_obj, client_data_obj, pck_inv_data_obj]
+
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        tasks = {}
+        for each in data_pre:
+            task = executor.submit(init_data, each)
+            tasks[each] = task
+        data = {}
+        for each in tasks.keys():
+            result = tasks[each].result()
+            data[each] = result
 
     for each in data.keys():
         print(each)

@@ -3,14 +3,22 @@ import csv
 from beans.dataMap import DataMap
 from utils.csvFileReader import read_csv_file
 
+def init(path, header):
+    with open(path, "w") as f:
+        writer = csv.writer(f)
+        writer.writerow(header)
+
 
 class PackingInvoiceData(DataMap):
 
     def __init__(self):
         self.file_name = "PackingInvoiceData.csv"
-        self.header = ["Client ID", "Client Name", "Invoice No.", "S/C No.", "Data", "Destination port",
+        self.header = ["Invoice No.", "Client Name", "S/C No.", "Data", "Destination port",
                        "Goods description", "Unit price", "Quantity", "Bags", "Net weight", "Gross weight",
                        "Total Measurement"]
+        self.data_map = []
+
+    def init_data(self):
         self.data_map = read_csv_file(self.file_name, self.header, self.get_file_path(self.file_name))
 
     def init_file(self):
@@ -40,3 +48,7 @@ class PackingInvoiceData(DataMap):
                                 return
             except PermissionError:
                 return False
+
+    def get_record_by_inv(self, invoice_number):
+        for each in self.data_map:
+            pass

@@ -9,6 +9,9 @@ class ClientData(DataMap):
     def __init__(self):
         self.file_name = "ClientData.csv"
         self.header = ["Client ID", "Client Name", "Client Phone Number", "Client Address"]
+        self.data_map = []
+
+    def init_data(self):
         self.data_map = read_csv_file(self.file_name, self.header, self.get_file_path(self.file_name))
 
     def init_file(self):

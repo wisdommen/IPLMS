@@ -2,11 +2,7 @@
 
 你需要先给你的python环境装上PysimpleGUI，然后再启动。
 
-登录界面输入，任何地方输入1，点击登录为进入会计页面
-
-登录界面输入，任何地方输入2，点击登录为进入装货页面
-
-登录界面点击登录为进入管理页面
+请在userData.csv文件中寻找登录信息
 
 你很可能会遇到各种疑难杂症，但是我也没办法，这破玩意儿在我电脑上运行的很好。
 PysimpleGUI就是个憨憨，要不是要交作业，我铁用PyQt 5。
@@ -23,18 +19,14 @@ PysimpleGUI就是个憨憨，要不是要交作业，我铁用PyQt 5。
 ##ENGLISH INSTRUCTIONS:
 You need install PysimpleGUI before start the program.
 
-Login page -> enter 1 in any place -> click login = enter Financial Page
-
-Login page -> enter 2 in any place -> click login = enter Loading Department Page
-
-Login page -> click login = enter Admin Page
+Please search for login information in userData.csv
 
 You may meet any error, that is not what I can control, it works 1000% good in my environment. 
 This is very common.
 Please do some researches before contact me.
 
 ###Known exceptions:
-1. Can't recognize the image file
+1. Can't recognize the image file (on macOS)
 2. ...
 
 If you meet any problem like above, do Google first, then good luck! =)

@@ -31,7 +31,9 @@ class main(MainApplication):
         config = Config.get_config()
 
         # if use database (developing)
-        if config["enable_database"]=="":
+        if config["enable_database"]=="true":
+            print("connecting to the database...")
+            print("")
             pass
 
         # set up login page
@@ -64,6 +66,7 @@ class main(MainApplication):
                                 print(event3, values3)
                                 if event3 == "_PL_NEW_BTN_":
                                     client = self.create_window("client","IPLMS", self.client_ui.get_layout(), disable_close=True)
+                                    client.un_hide()
                                     event4, values4 = client.read()
                                     print(event4, values4)
                                     if event4 == "_CP_SAVE_BTN_":
@@ -72,7 +75,6 @@ class main(MainApplication):
                                         client.hide()
                                 elif event3 == "_FA_QUIT_BTN_" or event3 is None:
                                     break
-                            print(event3, values3)
                             break
                         elif department == "packing":
                             packing = self.create_window("packing","IPLMS - Packing List Generator", self.packing_ui.get_layout())
@@ -82,6 +84,7 @@ class main(MainApplication):
                                 print(event2, values2)
                                 if event2 == "_PL_NEW_BTN_":
                                     client = self.create_window("client","IPLMS", self.client_ui.get_layout(), disable_close=True)
+                                    client.un_hide()
                                     event4, values4 = client.read()
                                     print(event4, values4)
                                     if event4 == "_CP_SAVE_BTN_":
@@ -100,6 +103,7 @@ class main(MainApplication):
                                 print(event5, values5)
                                 if event5 == "_AD_UGM_BTN_":
                                     user_manage = self.create_window("user_manage", "IPLMS", self.user_manage_ui.get_layout(), disable_close=True)
+                                    user_manage.un_hide()
                                     event6 = ""
                                     while event6 is not None:
                                         event6, values6 = user_manage.read()
@@ -113,6 +117,7 @@ class main(MainApplication):
                                             break
                                         elif event6 == "_UM_CREATE_BTN_":
                                             new_user = self.create_window("new_user", "IPLMS", self.new_user_ui.get_layout(), disable_close=True)
+                                            new_user.un_hide()
                                             new_user.bring_to_front()
                                             event7, values7 = new_user.read()
                                             print(event7, values7)
