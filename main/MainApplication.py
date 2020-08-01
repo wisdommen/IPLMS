@@ -8,6 +8,7 @@ from beans.packingInvoiceData import PackingInvoiceData
 from beans.userData import UserData
 from ui.LoginUI import Login, MessageBox
 from ui.FinancialUI import Financial
+from ui.OpenRecordUI import OpenRecord
 from ui.PackingUI import Packing
 from ui.AdminUI import Admin
 from ui.ClientPageUI import Client
@@ -72,6 +73,13 @@ class MainApplication(metaclass=ABCMeta):
             self.windows_map[id] = window
             return window
         return self.windows_map[id]
+
+    @staticmethod
+    def create_open_record_window(row, col, data_list, header_list):
+        open_record_ui = OpenRecord(row, col, data_list, header_list)
+        window = sg.Window("Choose the record", open_record_ui.get_layout(), auto_size_buttons=False, background_color="white", finalize=True,
+                           disable_close=True)
+        return window
 
     @abstractmethod
     def on_enable(self):

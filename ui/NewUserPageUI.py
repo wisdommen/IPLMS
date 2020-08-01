@@ -20,23 +20,28 @@ class NewUser(UI):
         ]
 
         column1 = [
-            [sg.Text("Group Name:", font=("arial", 10), background_color="white", text_color="black"),sg.InputText(key="_NU_PHONE_IP_", size=(25, 1))]
+            [sg.Text("Group Name:", font=("arial", 10), background_color="white", text_color="black"),
+             sg.InputText(key="_NU_PHONE_IP_", size=(25, 1))]
         ]
 
         column2 = [
-            [sg.Text("Password: ",font=("arial", 10), background_color="white", text_color="black"),sg.InputText(key="_NU_NAME_IP_", size=(25, 1))]
+            [sg.Text("Password: ", font=("arial", 10), background_color="white", text_color="black"),
+             sg.InputText(key="_NU_NAME_IP_", size=(25, 1))]
         ]
 
         buttons = [
-            [sg.Button(image_data=save_btn_ioc,border_width=0, size=(20, 1), button_color=("black", "light gray"), key="_NU_CREATE_BTN_"),
-            sg.Button(image_data=cancel_btn_ioc, border_width=0, size=(20, 1), button_color=("black", "light gray"),
+            [sg.Button(image_data=save_btn_ioc, border_width=0, size=(20, 1), button_color=("black", "light gray"),
+                       key="_NU_CREATE_BTN_"),
+             sg.Button(image_data=cancel_btn_ioc, border_width=0, size=(20, 1), button_color=("black", "light gray"),
                        key="_NU_CANCEL_BTN")]
         ]
 
         column_all = [
-            [sg.Column(title, background_color="white", key="_NU_TITLE_COLUMN_",  justification="center")],
-            [sg.Column(column1, background_color="white", key="_NU_NAME_COLUMN_",pad=(10,10), justification="center")],
-            [sg.Column(column2, background_color="white", key="_NU_PASSWORD_COLUMN_",pad=(10,10), justification="center")],
+            [sg.Column(title, background_color="white", key="_NU_TITLE_COLUMN_", justification="center")],
+            [sg.Column(column1, background_color="white", key="_NU_NAME_COLUMN_", pad=(10, 10),
+                       justification="center")],
+            [sg.Column(column2, background_color="white", key="_NU_PASSWORD_COLUMN_", pad=(10, 10),
+                       justification="center")],
             [sg.Column(buttons, pad=(10, 20), background_color="white", justification="center")],
         ]
 

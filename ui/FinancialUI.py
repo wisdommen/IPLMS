@@ -18,36 +18,48 @@ class Financial(UI):
         quit_btn_ioc = b"R0lGODlhoAAjAHAAACwAAAAAoAAjAIf////+9/f6zs7xf3/sUFDsTk7rRUXwcXH2rKz+8/P//v796OjxfHz85eX98fHvbGztWlr2sLDvaWnsS0vvcHD4w8P0lZXuZWX3tLT71dX85OT97Oz84+P5ycnwd3frSEjygYH2qKjsUVH0mJj++Pj71tb61dX739///f35zc3rRkbrSkryiIjzkZHuX1/4u7v+9fX60ND72Njxfn7weHj729vweXntVFT3tbX+9vb1pKTsUlLygoL84eH5w8P+8fH1oqL719f+9PTuYmLtXFzvb2/va2vuXV3tV1fvbW30nZ3wcnLuYGDrSUnuZGT96envZmb3trbyhITsSkr4vr7//Pz+8vL1paX6zc397u7/+/v96ur84OD0mZnsT0/4wMD0nJz97+/tVVX5xsb2q6vxfX385ubwdHT1o6Pxe3vvaGjzkJD96+v5x8f85+f1np7vZ2f98PD0np75y8v2r6/0l5f97e3vamr3uLj++fn4wsL1oaH3sLD2p6fwbW372dn1p6fsTEzyi4vyjIz3t7f0mpr++vr3ubntWFj4xMT3s7PrR0fuYWHwenrwe3v6z8/72tr5yMj84uL2ra3yhYX2rq7yior73Nz5ysr0n5/zk5P0lpbzlJT609PzjY3uXl74vLz86en1n5/tU1Pwb2/uZmbyg4P2qanxeXn1qantW1sAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI/wABCLyESoyBgwgTKlzIsKHDhxAjSpxIsWJEMaXICBSYxYPFjyBDihxJciKqLACylCrJsqXLly3FZCEDs6bNmzgRklmZs6fPnxR5Ah1KtKjRo0iTKl3KtKnTp1CjlsLCIqrVkRkvXcqS5RIWjx89zLxK1mIXlFmweL0kEIvBsnBtskhZNaGYF12Fgix1CWzcuB4AXNKL8O5YkSz6/o1ruIvDqQB4lir1NiHlgxgNYtTYxYOHyouhlsr78AUAsKZpWgagWixND1jQau0COnTT0S8gnn1hEAsAx5YPe7hEU4wHvGQ817bNtBSA3A9ZzOz9W6Hz1ocNnPXLXHQW6A6l8+Q2kNp6dQPDVWs/3d3qaCy6vx/0DRzh9YOuEW5vH1Xm4IeHsEceAKlYJ1wW9XUhIH9OicHZY1vxlMp5CM0FXHr6dcSgd1nUtVCACQJwiF2xQSdWgQftt+FTgSFonW8pgJbSalmgKFaIHq7YlFhceaUWSocQFuAlqaTi21Y21ojQcGmlUp+OSolxyI+CUdVQKlpdkgJtVhowVY5dqEXkclAiJUYqHZapZnRZHELmmmqWckibLLBAGJxllpICVwi+iaeX/JXiQZ13/nlQRoYaelahiW4oVkqMNtodXxtNJymDYpwlUEAAOw=="
 
         title = [
-            [sg.Text("Financial Use ONLY", font=("Helvetica", 25),size=(20, 1), background_color="white", text_color="red", justification="center")]
+            [sg.Text("Financial Use ONLY", font=("Helvetica", 25), size=(20, 1), background_color="white",
+                     text_color="red", justification="center")]
         ]
 
         column1 = [
-            [sg.Text("Client information:", size=(15, 1), background_color="white", text_color="black", justification="center"),
-             sg.InputCombo(('Client 1', 'Client 2'), size=(19, 1)), sg.Button("", font=("Helvetica", 8),size=(4, 1), button_color=("black", "light gray"), key="_PL_NEW_BTN_",border_width=0, image_data=new_client_ioc, tooltip="Add a new client")],
-            [sg.Text("Invoice No.:", size=(15, 1), background_color="white", text_color="black", justification="center"),
+            [sg.Text("Client information:", size=(15, 1), background_color="white", text_color="black",
+                     justification="center"),
+             sg.InputCombo(('Client 1', 'Client 2'), size=(19, 1)),
+             sg.Button("", font=("Helvetica", 8), size=(4, 1), button_color=("black", "light gray"), key="_FA_NEW_BTN_",
+                       border_width=0, image_data=new_client_ioc, tooltip="Add a new client")],
+            [sg.Text("Invoice No.:", size=(15, 1), background_color="white", text_color="black",
+                     justification="center"),
              sg.InputText(key="_FA_INV_IP_", size=(25, 1), enable_events=True)],
             [sg.Text("S/C No.:", size=(15, 1), background_color="white", text_color="black", justification="center"),
              sg.InputText(key="_FA_SC_IP_", size=(25, 1), enable_events=True)],
-            [sg.Text("Date and Time:", size=(15, 1), background_color="white", text_color="black", justification="center"),
-             sg.InputText(key="_FA_DATE_IP_", size=(21, 1), enable_events=True), sg.CalendarButton('', font=("Helvetica", 8), size=(5, 1), target=(3,1), key="_FA_DATE_PICKER_", border_width=0, image_data=calendar_ico, tooltip="Choose a date")]
+            [sg.Text("Date and Time:", size=(15, 1), background_color="white", text_color="black",
+                     justification="center"),
+             sg.InputText(key="_FA_DATE_IP_", size=(21, 1), enable_events=True),
+             sg.CalendarButton('', font=("Helvetica", 8), size=(5, 1), target=(3, 1), key="_FA_DATE_PICKER_",
+                               border_width=0, image_data=calendar_ico, tooltip="Choose a date")]
         ]
 
         column2 = [
-            [sg.Text("Destination port: ", size=(15, 1), background_color="white", text_color="black", justification="center"),
-            sg.InputText(key="_FA_DES_PORT_IP_", size=(25, 1), enable_events=True)],
-            [sg.Text("Goods Description:", size=(15, 1), background_color="white", text_color="black", justification="center"),
+            [sg.Text("Destination port: ", size=(15, 1), background_color="white", text_color="black",
+                     justification="center"),
+             sg.InputText(key="_FA_DES_PORT_IP_", size=(25, 1), enable_events=True)],
+            [sg.Text("Goods Description:", size=(15, 1), background_color="white", text_color="black",
+                     justification="center"),
              sg.InputText(key="_FA_GOODS_DES_IP_", size=(25, 1), enable_events=True)],
-            [sg.Text("Unit Price/AUD:", size=(15, 1), background_color="white", text_color="black", justification="center"),
-             sg.Spin(values=[i for i in range(1, 10000)],size=(23,1), initial_value='1000')],
-            [sg.Text("Quantity/TON:", size=(15, 1), background_color="white", text_color="black", justification="center"),
-             sg.Spin(values=[i for i in range(1, 1000)],size=(23,1), initial_value='20')]
+            [sg.Text("Unit Price/AUD:", size=(15, 1), background_color="white", text_color="black",
+                     justification="center"),
+             sg.Spin(values=[i for i in range(1, 10000)], size=(23, 1), initial_value='1000')],
+            [sg.Text("Quantity/TON:", size=(15, 1), background_color="white", text_color="black",
+                     justification="center"),
+             sg.Spin(values=[i for i in range(1, 1000)], size=(23, 1), initial_value='20')]
         ]
 
         buttons = [
             [sg.Button("", size=(20, 1), button_color=("black", "light gray"), key="_FA_SAVE_BTN_",
                        image_data=save_btn_ioc, border_width=0, tooltip="Save Now"),
              sg.Button("", size=(20, 1), button_color=("black", "light gray"), key="_FA_LOAD_BTN_",
-                        image_data=load_btn_ioc, border_width=0, tooltip="Load file"),
+                       image_data=load_btn_ioc, border_width=0, tooltip="Load file"),
              sg.Button("", size=(20, 1), button_color=("black", "light gray"), key="_FA_CLA_BTN_",
                        image_data=clear_btn_ioc, border_width=0, tooltip="Clear All"),
              sg.Button("", size=(20, 1), button_color=("black", "light gray"), key="_FA_QUIT_BTN_",
@@ -56,12 +68,12 @@ class Financial(UI):
         ]
 
         column_all = [
-            [sg.Column(title, pad=(10,10), background_color="white", key="_FA_TITL_COLUMN_", justification="center")],
-            [sg.Column(column1,pad=(20,10), background_color="white", key="_FA_COLUMN_1_"), sg.Column(column2,pad=(20,10), background_color="white", key="_FA_COLUMN_2_")],
+            [sg.Column(title, pad=(10, 10), background_color="white", key="_FA_TITL_COLUMN_", justification="center")],
+            [sg.Column(column1, pad=(20, 10), background_color="white", key="_FA_COLUMN_1_"),
+             sg.Column(column2, pad=(20, 10), background_color="white", key="_FA_COLUMN_2_")],
             [sg.Column(buttons, pad=(10, 30), background_color="white", justification="center")],
         ]
 
         self._layout = [
             [sg.Column(column_all, pad=(10, 10), background_color="white")]
         ]
-

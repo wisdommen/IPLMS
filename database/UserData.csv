@@ -1,1 +1,4 @@
-department,username,password,is_blockedpacking,wisdomme,111,falsefinancial,wisdomme,222,falseadmin,wisdomme,333,false
+department,username,password,is_blocked
+packing,wisdomme,111,false
+financial,wisdomme,222,false
+admin,wisdomme,333,false

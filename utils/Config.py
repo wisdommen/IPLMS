@@ -25,7 +25,8 @@ def get_config():
 
 
 def save_default_config():
-    config = {"enable_database": False, "ip": "localhost", "port": 3306, "username": "root", "password": "root", "database":"IPLMS"}
+    config = {"enable_database": False, "ip": "localhost", "port": 3306, "username": "root", "password": "root",
+              "database": "IPLMS"}
     if not os.path.exists(os.getcwd() + "/config"):
         os.makedirs(os.getcwd() + "/config")
     with open(os.getcwd() + "/config/config.yml", "w") as f:

@@ -1,4 +1,5 @@
 import csv
+from datetime import time
 
 from beans.dataMap import DataMap
 from utils.csvFileReader import read_csv_file
@@ -11,15 +12,18 @@ class UserData(DataMap):
         self.header = ["department", "username", "password", "is_blocked"]
         self.data_map = []
 
+    # Override
     def init_data(self):
         self.data_map = read_csv_file(self.file_name, self.header, self.get_file_path(self.file_name))
 
+    # Override
     def init_file(self):
         DataMap.make_dirs()
         with open(self.get_file_path(self.file_name), "w") as f:
             writer = csv.writer(f)
             writer.writerow(self.header)
 
+    # Override
     def save_data(self, data_list):
         if len(data_list) > 0:
             records = []
@@ -31,13 +35,15 @@ class UserData(DataMap):
                     record.append(data_map[each])
                 records.append(record)
             try:
-                if len(records) == 1:
+                if len(records) > 1:
                     for each in records:
                         for string in each:
                             if string != '':
-                                with open(self.get_file_path(self.file_name), "w+") as f:
+                                with open(self.get_file_path(self.file_name), "w", encoding='utf8', newline='') as f:
                                     writer = csv.writer(f)
-                                    writer.writerows(records)
+                                    writer.writerow(self.header)
+                                    for record in records:
+                                        writer.writerow(record)
                                 return
             except PermissionError:
                 return False

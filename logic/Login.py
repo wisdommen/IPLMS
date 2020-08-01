@@ -1,6 +1,3 @@
-from beans.userData import UserData
-
-
 class Login(object):
 
     def __init__(self, username, password):

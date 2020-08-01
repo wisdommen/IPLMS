@@ -20,15 +20,18 @@ class Login(UI):
         ]
 
         column1 = [
-            [sg.Text("Username:", font=("arial", 10), background_color="light gray", text_color="black"),sg.InputText(key="_USERNAME_", size=(25, 1), enable_events=True)]
+            [sg.Text("Username:", font=("arial", 10), background_color="light gray", text_color="black"),
+             sg.InputText(key="_USERNAME_", size=(25, 1), enable_events=True)]
         ]
 
         column2 = [
-            [sg.Text("Password: ",font=("arial", 10), background_color="light gray", text_color="black"),sg.InputText(key="_PASSWORD_", password_char="*", size=(25, 1), enable_events=True)]
+            [sg.Text("Password: ", font=("arial", 10), background_color="light gray", text_color="black"),
+             sg.InputText(key="_PASSWORD_", password_char="*", size=(25, 1), enable_events=True)]
         ]
 
         buttons = [
-            [sg.Button(image_data=login_ioc_base64,border_width=0, size=(20, 1), button_color=("black", "light gray"), key="_LOGIN_")]
+            [sg.Button(image_data=login_ioc_base64, border_width=0, size=(20, 1), button_color=("black", "light gray"),
+                       key="_LOGIN_")]
         ]
 
         column_cross = [
@@ -37,9 +40,11 @@ class Login(UI):
         ]
 
         column_all = [
-            [sg.Column(title, background_color="light gray", key="_TITLE_COLUMN_",  justification="center")],
-            [sg.Column(column1, background_color="light gray", key="_NAME_COLUMN_",pad=(10,10), justification="center")],
-            [sg.Column(column2, background_color="light gray", key="_DATE_COLUMN_",pad=(10,10), justification="center")],
+            [sg.Column(title, background_color="light gray", key="_TITLE_COLUMN_", justification="center")],
+            [sg.Column(column1, background_color="light gray", key="_NAME_COLUMN_", pad=(10, 10),
+                       justification="center")],
+            [sg.Column(column2, background_color="light gray", key="_DATE_COLUMN_", pad=(10, 10),
+                       justification="center")],
             [sg.Column(buttons, pad=(10, 20), background_color="light gray", justification="center")],
         ]
 
@@ -47,6 +52,7 @@ class Login(UI):
             [sg.Column(column_cross, background_color="light gray", justification="right")],
             [sg.Column(column_all, pad=(20, 10), background_color="light gray", justification="center")]
         ]
+
 
 """
 Summary: Show message boxes

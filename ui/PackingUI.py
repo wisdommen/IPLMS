@@ -24,38 +24,53 @@ class Packing(UI):
         ]
 
         column1 = [
-            [sg.Text("Client information:", size=(20, 1), background_color="white", text_color="black", justification="center"),
-             sg.InputCombo(('Client 1', 'Client 2'), size=(19, 1)), sg.Button("", font=("Helvetica", 8),size=(4, 1), button_color=("black", "light gray"), key="_PL_NEW_BTN_",border_width=0, image_data=new_client_ioc, tooltip="Add a new client")],
-            [sg.Text("Invoice No.:", size=(20, 1), background_color="white", text_color="black", justification="center"),
+            [sg.Text("Client information:", size=(20, 1), background_color="white", text_color="black",
+                     justification="center"),
+             sg.InputCombo(('Client 1', 'Client 2'), size=(19, 1)),
+             sg.Button("", font=("Helvetica", 8), size=(4, 1), button_color=("black", "light gray"), key="_PL_NEW_BTN_",
+                       border_width=0, image_data=new_client_ioc, tooltip="Add a new client")],
+            [sg.Text("Invoice No.:", size=(20, 1), background_color="white", text_color="black",
+                     justification="center"),
              sg.InputText(key="_PL_INV_IP_", size=(25, 1), enable_events=True)],
             [sg.Text("S/C No.:", size=(20, 1), background_color="white", text_color="black", justification="center"),
              sg.InputText(key="_PL_SC_IP_", size=(25, 1), enable_events=True)],
-            [sg.Text("Date and Time:", size=(20, 1), background_color="white", text_color="black", justification="center"),
+            [sg.Text("Date and Time:", size=(20, 1), background_color="white", text_color="black",
+                     justification="center"),
              sg.InputText(key="_PL_DATE_IP_", size=(21, 1), enable_events=True),
-             sg.CalendarButton('', font=("Helvetica", 8), size=(5, 1), target=(3,1), key="_FA_DATE_PICKER_", border_width=0, image_data=calendar_ico, tooltip="Choose a date")],
+             sg.CalendarButton('', font=("Helvetica", 8), size=(5, 1), target=(3, 1), key="_FA_DATE_PICKER_",
+                               border_width=0, image_data=calendar_ico, tooltip="Choose a date")],
             [sg.Text("Destination port: ", size=(20, 1), background_color="white", text_color="black",
                      justification="center"),
              sg.InputText(key="_PL_DES_PORT_IP_", size=(25, 1), enable_events=True)]
         ]
 
         column2 = [
-            [sg.Text("Goods Description:", size=(20, 1), background_color="white", text_color="black",justification="center"),
+            [sg.Text("Goods Description:", size=(20, 1), background_color="white", text_color="black",
+                     justification="center"),
              sg.InputText(key="_PL_GOODS_DES_IP_", size=(25, 1), enable_events=True)],
-            [sg.Text("Packages/Bags:", size=(20, 1), background_color="white", text_color="black",justification="center"),
+            [sg.Text("Packages/Bags:", size=(20, 1), background_color="white", text_color="black",
+                     justification="center"),
              sg.Spin(values=[i for i in range(1, 10000)], size=(23, 1), initial_value='1000')],
-            [sg.Text("Total Net Weight/KGS:", size=(20, 1), background_color="white", text_color="black",justification="center"),
+            [sg.Text("Total Net Weight/KGS:", size=(20, 1), background_color="white", text_color="black",
+                     justification="center"),
              sg.Spin(values=[i for i in range(1, 10000)], size=(23, 1), initial_value='1000')],
-            [sg.Text("Total Gross Weight/KGS:", size=(20, 1), background_color="white", text_color="black",justification="center"),
+            [sg.Text("Total Gross Weight/KGS:", size=(20, 1), background_color="white", text_color="black",
+                     justification="center"),
              sg.Spin(values=[i for i in range(1, 1000)], size=(23, 1), initial_value='20')],
-            [sg.Text("Total Measurement/CBM:", size=(20, 1), background_color="white", text_color="black", justification="center"),
+            [sg.Text("Total Measurement/CBM:", size=(20, 1), background_color="white", text_color="black",
+                     justification="center"),
              sg.Spin(values=[i for i in range(1, 1000)], size=(23, 1), initial_value='20')]
         ]
 
         buttons = [
-            [sg.Button("", size=(20, 1), button_color=("black", "light gray"), key="_PL_SAVE_BTN_", image_data=save_btn_ioc, border_width=0, tooltip="Save Now"),
-             sg.Button("", size=(20, 1), button_color=("black", "light gray"), key="_FA_LOAD_BTN_", image_data=load_btn_ioc, border_width=0, tooltip="Load file"),
-             sg.Button("", size=(20, 1), button_color=("black", "light gray"), key="_PL_CLA_BTN_", image_data=clear_btn_ioc, border_width=0, tooltip="Clear All"),
-             sg.Button("", size=(20, 1), button_color=("black", "light gray"), key="_PL_QUIT_BTN_", image_data=quit_btn_ioc, border_width=0, tooltip="Quit the program")]
+            [sg.Button("", size=(20, 1), button_color=("black", "light gray"), key="_PL_SAVE_BTN_",
+                       image_data=save_btn_ioc, border_width=0, tooltip="Save Now"),
+             sg.Button("", size=(20, 1), button_color=("black", "light gray"), key="_PL_LOAD_BTN_",
+                       image_data=load_btn_ioc, border_width=0, tooltip="Load file"),
+             sg.Button("", size=(20, 1), button_color=("black", "light gray"), key="_PL_CLA_BTN_",
+                       image_data=clear_btn_ioc, border_width=0, tooltip="Clear All"),
+             sg.Button("", size=(20, 1), button_color=("black", "light gray"), key="_PL_QUIT_BTN_",
+                       image_data=quit_btn_ioc, border_width=0, tooltip="Quit the program")]
         ]
 
         column_all = [
