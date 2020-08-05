@@ -29,7 +29,9 @@ class Financial(AbstractPackingInvoiceClass):
             return True
         elif self.event == "_FA_SAVE_BTN_":
             # save the record
-            self.save(main, field_data)
+            for each in self.values.values():
+                if each != "":
+                    self.save(main, field_data)
             return True
         elif self.event == "_FA_QUIT_BTN_" or self.event is None:
             # TODO ask for saving the unsaved changes
