@@ -55,7 +55,7 @@ class main(MainApplication):
                             while flag:
                                 event3, values3 = financial.read()
                                 print(event3, values3)
-                                financial_logic = Financial(event3, values3)
+                                financial_logic = Financial(self, event3, values3)
                                 flag = financial_logic.run(self)
                             break
                         elif department == "packing":
@@ -65,17 +65,19 @@ class main(MainApplication):
                             while flag:
                                 event3, values3 = packing.read()
                                 print(event3, values3)
-                                packing_logic = Packing(event3, values3)
+                                packing_logic = Packing(self, event3, values3)
                                 flag = packing_logic.run(self)
                             break
                         elif department == "admin":
+                            header_list = ["Invoice No.", "Client Name", "Data", "Goods description"]
+                            self.admin_ui.set_table(header_list, self.pck_inv_data_obj.data_map)
                             admin = self.create_window("admin", "Invoice and Packing List Management System",
                                                        self.admin_ui.get_layout())
                             flag = True
                             while flag:
                                 event3, values3 = admin.read()
                                 print(event3, values3)
-                                admin_logic = Admin(event3, values3)
+                                admin_logic = Admin(self, event3, values3)
                                 flag = admin_logic.run(self)
                             break
                     else:

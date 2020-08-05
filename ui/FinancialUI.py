@@ -1,13 +1,13 @@
 import PySimpleGUI as sg
 
-from ui.UI import UI
+from ui.AbstractUI import UI
 
 """
 Summary: This class is the main body layout of the GUI
 """
 
 
-class Financial(UI):
+class Financial_UI(UI):
     # initiate the layout
     def __init__(self):
         new_client_ioc = b"R0lGODlhFwAVAHAAACwAAAAAFwAVAIH///8AqPMAAAAAAAACPYQfmcfdCp00sM5X7aU5btB5W6h8IBlwi0MiJbN0oJq6cVSK2fieLQpMBVG+4c4YwqyKwKIt6KQ1dcYooAAAOw=="
@@ -25,7 +25,7 @@ class Financial(UI):
         column1 = [
             [sg.Text("Client information:", size=(15, 1), background_color="white", text_color="black",
                      justification="center"),
-             sg.InputCombo(('Client 1', 'Client 2'), size=(19, 1)),
+             sg.InputCombo(('Client 1', 'Client 2'), size=(19, 1), key="_FA_CLIENT_CB_"),
              sg.Button("", font=("Helvetica", 8), size=(4, 1), button_color=("black", "light gray"), key="_FA_NEW_BTN_",
                        border_width=0, image_data=new_client_ioc, tooltip="Add a new client")],
             [sg.Text("Invoice No.:", size=(15, 1), background_color="white", text_color="black",
@@ -49,10 +49,10 @@ class Financial(UI):
              sg.InputText(key="_FA_GOODS_DES_IP_", size=(25, 1), enable_events=True)],
             [sg.Text("Unit Price/AUD:", size=(15, 1), background_color="white", text_color="black",
                      justification="center"),
-             sg.Spin(values=[i for i in range(1, 10000)], size=(23, 1), initial_value='1000')],
+             sg.Spin(values=[i for i in range(1, 10000)], size=(23, 1), initial_value='1000', key="_FA_PRICE_SP_")],
             [sg.Text("Quantity/TON:", size=(15, 1), background_color="white", text_color="black",
                      justification="center"),
-             sg.Spin(values=[i for i in range(1, 1000)], size=(23, 1), initial_value='20')]
+             sg.Spin(values=[i for i in range(1, 1000)], size=(23, 1), initial_value='20', key="_FA_QUA_SP_")]
         ]
 
         buttons = [

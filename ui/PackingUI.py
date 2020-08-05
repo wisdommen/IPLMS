@@ -1,13 +1,13 @@
 import PySimpleGUI as sg
 
-from ui.UI import UI
+from ui.AbstractUI import UI
 
 """
 Summary: This class is the main body layout of the GUI
 """
 
 
-class Packing(UI):
+class Packing_UI(UI):
 
     # initiate the layout
     def __init__(self):
@@ -26,7 +26,7 @@ class Packing(UI):
         column1 = [
             [sg.Text("Client information:", size=(20, 1), background_color="white", text_color="black",
                      justification="center"),
-             sg.InputCombo(('Client 1', 'Client 2'), size=(19, 1)),
+             sg.InputCombo(('Client 1', 'Client 2'), size=(19, 1), key="_PL_CLIENT_CB_"),
              sg.Button("", font=("Helvetica", 8), size=(4, 1), button_color=("black", "light gray"), key="_PL_NEW_BTN_",
                        border_width=0, image_data=new_client_ioc, tooltip="Add a new client")],
             [sg.Text("Invoice No.:", size=(20, 1), background_color="white", text_color="black",
@@ -50,16 +50,16 @@ class Packing(UI):
              sg.InputText(key="_PL_GOODS_DES_IP_", size=(25, 1), enable_events=True)],
             [sg.Text("Packages/Bags:", size=(20, 1), background_color="white", text_color="black",
                      justification="center"),
-             sg.Spin(values=[i for i in range(1, 10000)], size=(23, 1), initial_value='1000')],
+             sg.Spin(values=[i for i in range(1, 10000)], size=(23, 1), initial_value='1000', key="_PL_PACK_SP_")],
             [sg.Text("Total Net Weight/KGS:", size=(20, 1), background_color="white", text_color="black",
                      justification="center"),
-             sg.Spin(values=[i for i in range(1, 10000)], size=(23, 1), initial_value='1000')],
+             sg.Spin(values=[i for i in range(1, 10000)], size=(23, 1), initial_value='1000', key="_PL_NET_SP_")],
             [sg.Text("Total Gross Weight/KGS:", size=(20, 1), background_color="white", text_color="black",
                      justification="center"),
-             sg.Spin(values=[i for i in range(1, 1000)], size=(23, 1), initial_value='20')],
+             sg.Spin(values=[i for i in range(1, 1000)], size=(23, 1), initial_value='20', key="_PL_GROSS_SP_")],
             [sg.Text("Total Measurement/CBM:", size=(20, 1), background_color="white", text_color="black",
                      justification="center"),
-             sg.Spin(values=[i for i in range(1, 1000)], size=(23, 1), initial_value='20')]
+             sg.Spin(values=[i for i in range(1, 1000)], size=(23, 1), initial_value='20', key="_PL_CBM_SP_")]
         ]
 
         buttons = [

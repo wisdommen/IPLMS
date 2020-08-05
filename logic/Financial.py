@@ -1,40 +1,38 @@
-from logic.Client import Client
-from main.MainApplication import MainApplication
-from utils.Utils import getUUID
+from utils.ClientUtils import create_new_client
+from utils.Utils import clear_all_input, load_record
+from logic.AbstractPackingInvoice import AbstractPackingInvoiceClass
 
 
-class Financial(object):
-    def __init__(self, event, values):
-        self.data_map = MainApplication.pck_inv_data_obj.data_map
-        self.event = event
-        self.values = values
-
-    def add_record(self, map):
-        self.data_map.append(map)
-
-    def remove_record(self, map):
-        self.data_map.remove(map)
+class Financial(AbstractPackingInvoiceClass):
 
     def run(self, main):
+        field_data = {
+            "_FA_CLIENT_CB_": "Client Name",
+            "_FA_INV_IP_": "Invoice No.",
+            "_FA_SC_IP_": "S/C No.",
+            "_FA_DATE_IP_": "Date",
+            "_FA_DES_PORT_IP_": "Destination port",
+            "_FA_GOODS_DES_IP_": "Goods description",
+            "_FA_PRICE_SP_": "Unit price",
+            "_FA_QUA_SP_": "Quantity"
+        }
+
         if self.event == "_FA_NEW_BTN_":
-            client = main.create_window("client", "IPLMS", MainApplication.client_ui.get_layout(), disable_close=True)
-            client["_CLIENT_ID_"].Update(getUUID())
-            client["_CP_NAME_IP_"].Update("")
-            client["_CP_PHONE_IP_"].Update("")
-            client["_CP_ADDRESS_IP_"].Update("")
-            client.un_hide()
-            event4, values4 = client.read()
-            print(event4, values4)
-            client_logic = Client(event4, values4)
-            client_logic.run(main)
-            client.hide()
+            create_new_client(main)
             return True
         elif self.event == "_FA_LOAD_BTN_":
+            # opening a record select window and load a record to fields
+            load_record(self, main, main.pck_inv_data_obj, "financial", field_data)
             return True
         elif self.event == "_FA_CLA_BTN_":
+            clear_all_input(main.windows_map["financial"], self.values)
+            return True
+        elif self.event == "_FA_SAVE_BTN_":
+            # save the record
+            self.save(main, field_data)
             return True
         elif self.event == "_FA_QUIT_BTN_" or self.event is None:
+            # TODO ask for saving the unsaved changes
             return False
         else:
             return True
-

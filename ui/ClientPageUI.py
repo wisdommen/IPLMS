@@ -1,13 +1,13 @@
 import PySimpleGUI as sg
 
-from ui.UI import UI
+from ui.AbstractUI import UI
 
 """
 Summary: This class is the main body layout of the GUI
 """
 
 
-class Client(UI):
+class Client_UI(UI):
 
     # initiate the layout
     def __init__(self):

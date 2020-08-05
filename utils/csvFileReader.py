@@ -29,11 +29,11 @@ def read_csv_file(file_name: str, header: list, file_path="", test=False) -> lis
                         data_map = {}
                         for k in range(len(header)):
                             try:
-                                if i[k] == '':
-                                    i[k] = "DATA BROKEN"
+                                # if i[k] == '':
+                                #     i[k] = "DATA BROKEN"
                                 data_map[header[k]] = i[k]
                             except IndexError:
-                                data_map[header[k]] = "DATA BROKEN"
+                                data_map[header[k]] = ""
                         if data_map in data_temp:
                             log("Warning! Absolute duplicate recode detected!", test)
                             log("Duplicated Record: %s" % str(i), test)

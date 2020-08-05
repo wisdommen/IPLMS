@@ -3,17 +3,17 @@ from abc import abstractmethod, ABCMeta
 import PySimpleGUI as sg
 
 # import ui
-from beans.cilentData import ClientData
-from beans.packingInvoiceData import PackingInvoiceData
-from beans.userData import UserData
-from ui.LoginUI import Login, MessageBox
-from ui.FinancialUI import Financial
-from ui.OpenRecordUI import OpenRecord
-from ui.PackingUI import Packing
-from ui.AdminUI import Admin
-from ui.ClientPageUI import Client
-from ui.NewUserPageUI import NewUser
-from ui.UserManagePageUI import UserMange
+from beans.ClientData import ClientData
+from beans.PackingInvoiceData import PackingInvoiceData
+from beans.UserData import UserData
+from ui.LoginUI import Login_UI, MessageBox_UI
+from ui.FinancialUI import Financial_UI
+from ui.OpenRecordUI import OpenRecord_UI
+from ui.PackingUI import Packing_UI
+from ui.AdminUI import Admin_UI
+from ui.ClientPageUI import Client_UI
+from ui.NewUserPageUI import NewUser_UI
+from ui.UserManagePageUI import UserMange_UI
 
 from concurrent.futures import ThreadPoolExecutor
 
@@ -29,16 +29,6 @@ def init_data(data_type):
 
 
 class MainApplication(metaclass=ABCMeta):
-    # instantiate UI objects
-    login_ui = Login()
-    financial_ui = Financial()
-    packing_ui = Packing()
-    admin_ui = Admin()
-    client_ui = Client()
-    new_user_ui = NewUser()
-    user_manage_ui = UserMange()
-    mg = MessageBox()
-
     # init data
     user_data_obj = UserData()
     client_data_obj = ClientData()
@@ -60,10 +50,20 @@ class MainApplication(metaclass=ABCMeta):
         print(each)
         print(data[each])
 
+    # instantiate UI objects
+    login_ui = Login_UI()
+    financial_ui = Financial_UI()
+    packing_ui = Packing_UI()
+    admin_ui = Admin_UI()
+    client_ui = Client_UI()
+    new_user_ui = NewUser_UI()
+    user_manage_ui = UserMange_UI()
+    mg = MessageBox_UI()
+
     windows_map = {}
 
-    def create_window(self, id, name, layout, size=(0, 0), disable_close=False):
-        if id not in self.windows_map.keys():
+    def create_window(self, id, name, layout, size=(0, 0), disable_close=False, reload=False):
+        if id not in self.windows_map.keys() or reload:
             if size == (0, 0):
                 window = sg.Window(name, layout, auto_size_buttons=False, background_color="white", finalize=True,
                                    disable_close=disable_close)
@@ -76,7 +76,7 @@ class MainApplication(metaclass=ABCMeta):
 
     @staticmethod
     def create_open_record_window(row, col, data_list, header_list):
-        open_record_ui = OpenRecord(row, col, data_list, header_list)
+        open_record_ui = OpenRecord_UI(row, col, data_list, header_list)
         window = sg.Window("Choose the record", open_record_ui.get_layout(), auto_size_buttons=False, background_color="white", finalize=True,
                            disable_close=True)
         return window

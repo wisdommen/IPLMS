@@ -1,22 +1,14 @@
 import PySimpleGUI as sg
 
-from ui.UI import UI
+from ui.AbstractUI import UI
+from utils.Utils import make_table
 
 """
 Summary: This class is the main body layout of the GUI
 """
 
 
-def make_table(num_rows, num_cols, data_list):
-    data = [[j for j in range(num_cols)] for i in range(num_rows)]
-    for i in range(0, len(data_list)):
-        data[i] = list(data_list[i].values())
-    return data
-
-
-class OpenRecord(UI):
-    # private element, shouldn't be changed from outside
-    _layout = []
+class OpenRecord_UI(UI):
 
     # initiate the layout
     def __init__(self, row, col, data_list, header_list):
@@ -42,7 +34,3 @@ class OpenRecord(UI):
                      text_color="black")],
             [sg.Column(column_all, pad=(20, 10), background_color="white", justification="center")]
         ]
-
-    # outside method can get the layout by this method
-    def get_layout(self):
-        return self._layout

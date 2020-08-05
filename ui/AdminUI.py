@@ -1,16 +1,22 @@
 import PySimpleGUI as sg
 
-from ui.UI import UI
+from ui.AbstractUI import UI
+from utils.Utils import make_table
 
 """
 Summary: This class is the main body layout of the GUI
 """
 
 
-class Admin(UI):
+class Admin_UI(UI):
 
     # initiate the layout
     def __init__(self):
+
+        self.header_list = ["Invoice No.", "Client Name", "Data", "Goods description"]
+        self.data_list = []
+        self.data = make_table(1, len(self.header_list), self.data_list)
+
         title = [
             [sg.Text("Administrator Use ONLY", font=("Helvetica", 25), size=(30, 1), background_color="white",
                      text_color="red", justification="center")]
@@ -27,13 +33,15 @@ class Admin(UI):
             [sg.Text("Key words:", size=(10, 1), background_color="white", text_color="black"),
              sg.InputText(key="_AD_KEY_IP_", size=(25, 1), enable_events=True),
              sg.Button("Search", size=(10, 1), key="_AD_SEARCH_BTN")],
-            [sg.Listbox(values=["value1", "value2", "value3"], size=(50, 15), enable_events=True, key='_AD_RST_LST_')]
+            [sg.Table(self.data, bind_return_key=True, key="_AD_RET_TABLE_", justification="center",
+                      headings=self.header_list, auto_size_columns=True, alternating_row_color='blue',
+                      size=(30,20))],
         ]
 
         buttons2 = [
-            [sg.Button("Open", pad=(10, 1), size=(10, 1), button_color=("black", "light gray"), key="_AD_OPEN_BTN_"),
-             sg.Button("Edit", pad=(10, 1), size=(10, 1), button_color=("black", "light gray"), key="_AD_EDIT_BTN_"),
-             sg.Button("Delete", pad=(10, 1), size=(10, 1), button_color=("black", "light gray"), key="_AD_DEL_BTN_")]
+            [sg.Button("Open by Excel", pad=(10, 1), size=(13, 1), button_color=("black", "light gray"), key="_AD_OPEN_BTN_"),
+             sg.Button("Edit", pad=(10, 1), size=(13, 1), button_color=("black", "light gray"), key="_AD_EDIT_BTN_"),
+             sg.Button("Delete", pad=(10, 1), size=(13, 1), button_color=("black", "light gray"), key="_AD_DEL_BTN_")]
         ]
 
         buttons = [
@@ -52,3 +60,7 @@ class Admin(UI):
         self._layout = [
             [sg.Column(column_all, pad=(20, 10), background_color="white")]
         ]
+
+    def set_table(self, header_list, data_list):
+        self.header_list = header_list
+        self.data_list = data_list

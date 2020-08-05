@@ -1,13 +1,13 @@
 import PySimpleGUI as sg
 
-from ui.UI import UI
+from ui.AbstractUI import UI
 
 """
 Summary: This class is the main body layout of the GUI
 """
 
 
-class Login(UI):
+class Login_UI(UI):
 
     # initiate the layout
     def __init__(self):
@@ -59,7 +59,7 @@ Summary: Show message boxes
 """
 
 
-class MessageBox(object):
+class MessageBox_UI(object):
     _warning = "WARNING!"
     _info = "INFO"
     _error = "ERROR"
