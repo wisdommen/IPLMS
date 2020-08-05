@@ -20,12 +20,14 @@ class Packing(AbstractPackingInvoiceClass):
         }
         if self.event == "_PL_NEW_BTN_":
             create_new_client(main)
+            # TODO chart the new client name into the field
             return True
         elif self.event == "_PL_LOAD_BTN_":
             # opening a record select window and load a record to fields
             self.record = load_record(self, main, main.pck_inv_data_obj, "packing", field_data)
             return True
         elif self.event == "_PL_CLA_BTN_":
+            # TODO show message box
             clear_all_input(main.windows_map["packing"], self.values)
             return True
         elif self.event == "_PL_SAVE_BTN_":
@@ -33,8 +35,11 @@ class Packing(AbstractPackingInvoiceClass):
             for each in self.values.values():
                 if each != "":
                     self.save(main, field_data)
+                    # TODO show message box
+            # TODO show message box
             return True
         elif self.event == "_PL_QUIT_BTN_" or self.event is None:
+            # TODO show message box
             # TODO ask for saving the unsaved changes
             return False
         else:

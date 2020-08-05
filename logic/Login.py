@@ -13,6 +13,7 @@ class Login(object):
                     return True
                 else:
                     return "Blocked"
+        # TODO show message box
         return "Unauthorized"
 
     def get_department(self):

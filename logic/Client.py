@@ -19,6 +19,7 @@ class Client(AbstractLogicClass):
 
         if self.event == "_CP_SAVE_BTN_":
             self.save(main, field_data)
+            # TODO show message box
         elif self.event == "_CP_CANCEL_BTN":
             pass
         elif self.event == "Open":

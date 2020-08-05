@@ -13,6 +13,7 @@ class Admin(AbstractPackingInvoiceClass):
             return True
         elif self.event == "_AD_DEL_BTN_":
             # TODO delete a selected record
+            # TODO show message box
             return True
         elif self.event == "_AD_SEARCH_BTN":
             # TODO the search
@@ -28,6 +29,7 @@ class Admin(AbstractPackingInvoiceClass):
             user_manage.hide()
             return True
         elif self.event == "_AD_QUIT_BTN_" or self.event is None:
+            # TODO show message box
             # TODO ask for saving the unsaved changes
             return False
         else:
