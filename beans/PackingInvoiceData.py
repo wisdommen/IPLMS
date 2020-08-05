@@ -37,7 +37,7 @@ class PackingInvoiceData(DataMap):
             for data_map in data_list:
                 record = []
                 for each in self.header:
-                    record.append(data_map.get(each, defult=""))
+                    record.append(data_map.get(each, ""))
                 records.append(record)
             try:
                 if len(records) > 1:
