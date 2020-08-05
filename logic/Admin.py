@@ -19,14 +19,14 @@ class Admin(AbstractPackingInvoiceClass):
             # TODO the search
             return True
         elif self.event == "_AD_UGM_BTN_":
-            user_manage = main.create_window("user_manage", "IPLMS",
-                                             main.user_manage_ui.get_layout(),
-                                             disable_close=True)
-            user_manage.un_hide()
-            event, values = user_manage.read()
-            user_manage_logic = UserManage(main, event, values)
-            user_manage_logic.run(main)
-            user_manage.hide()
+            # user_manage = main.create_window("user_manage", "IPLMS",
+            #                                  main.user_manage_ui.get_layout(),
+            #                                  disable_close=True)
+            # user_manage.un_hide()
+            # event, values = user_manage.read()
+            # user_manage_logic = UserManage(main, event, values)
+            # user_manage_logic.run(main)
+            # user_manage.hide()
             return True
         elif self.event == "_AD_QUIT_BTN_" or self.event is None:
             # TODO show message box

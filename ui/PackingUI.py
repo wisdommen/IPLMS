@@ -26,7 +26,7 @@ class Packing_UI(UI):
         column1 = [
             [sg.Text("Client information:", size=(20, 1), background_color="white", text_color="black",
                      justification="center"),
-             sg.InputCombo(('Client 1', 'Client 2'), size=(19, 1), key="_PL_CLIENT_CB_"),
+             sg.InputCombo(values=[], size=(19, 1), key="_PL_CLIENT_CB_"),
              sg.Button("", font=("Helvetica", 8), size=(4, 1), button_color=("black", "light gray"), key="_PL_NEW_BTN_",
                        border_width=0, image_data=new_client_ioc, tooltip="Add a new client")],
             [sg.Text("Invoice No.:", size=(20, 1), background_color="white", text_color="black",

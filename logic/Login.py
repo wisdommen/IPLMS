@@ -11,10 +11,8 @@ class Login(object):
                 self.identity = each
                 if self.identity["is_blocked"] != "true":
                     return True
-                else:
-                    return "Blocked"
         # TODO show message box
-        return "Unauthorized"
+        return False
 
     def get_department(self):
         return self.identity["department"]

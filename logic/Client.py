@@ -8,6 +8,7 @@ class Client(AbstractLogicClass):
         self.data_map = main.client_data_obj.data_map
         self.event = event
         self.values = values
+        self.record = {}
 
     def run(self, main):
         field_data = {
@@ -16,15 +17,15 @@ class Client(AbstractLogicClass):
             "_CP_PHONE_IP_": "Client Phone Number",
             "_CP_ADDRESS_IP_": "Client Address"
         }
-
         if self.event == "_CP_SAVE_BTN_":
             self.save(main, field_data)
             # TODO show message box
+            return self.values.get("_CP_NAME_IP_", "")
         elif self.event == "_CP_CANCEL_BTN":
-            pass
+            return ""
         elif self.event == "Open":
 
-            load_record(self, main, main.client_data_obj, "client", field_data)
+            self.record = load_record(self, main, main.client_data_obj, "client", field_data)
 
             event, values = main.windows_map["client"].read()
             self.event = event

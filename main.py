@@ -7,6 +7,7 @@ from main.MainApplication import MainApplication
 import PySimpleGUI as sg
 
 from utils import Config
+from utils.Utils import update_client_list
 
 
 class main(MainApplication):
@@ -41,49 +42,55 @@ class main(MainApplication):
 
             print(event, values)
 
-            if event != "_LG_CROSS_":
-                if event == "_LOGIN_":
-                    login_logic = Login(values["_USERNAME_"], values["_PASSWORD_"])
-                    passport = login_logic.get_login(self.user_data_obj)
-                    if passport == True:
-                        department = login_logic.get_department()
-                        login.hide()
-                        if department == "financial":
-                            financial = self.create_window("financial", "IPLMS - Invoice Generator",
-                                                           self.financial_ui.get_layout())
-                            flag = True
-                            while flag:
-                                event3, values3 = financial.read()
-                                print(event3, values3)
-                                financial_logic = Financial(self, event3, values3)
-                                flag = financial_logic.run(self)
-                            break
-                        elif department == "packing":
-                            packing = self.create_window("packing", "IPLMS - Packing List Generator",
-                                                         self.packing_ui.get_layout())
-                            flag = True
-                            while flag:
-                                event3, values3 = packing.read()
-                                print(event3, values3)
-                                packing_logic = Packing(self, event3, values3)
-                                flag = packing_logic.run(self)
-                            break
-                        elif department == "admin":
-                            header_list = ["Invoice No.", "Client Name", "Data", "Goods description"]
-                            self.admin_ui.set_table(header_list, self.pck_inv_data_obj.data_map)
-                            admin = self.create_window("admin", "Invoice and Packing List Management System",
-                                                       self.admin_ui.get_layout())
-                            flag = True
-                            while flag:
-                                event3, values3 = admin.read()
-                                print(event3, values3)
-                                admin_logic = Admin(self, event3, values3)
-                                flag = admin_logic.run(self)
-                            break
-                    else:
-                        print(passport)
             # "X" on the windows top was pressed
-            elif event == "_LG_CROSS_":
+            if event == "_LG_CROSS_":
+                break
+            if event != "_LOGIN_":
+                continue
+            login_logic = Login(values["_USERNAME_"], values["_PASSWORD_"])
+            passport = login_logic.get_login(self.user_data_obj)
+            if not passport:
+                # TODO show message box
+                continue
+            department = login_logic.get_department()
+            login.hide()
+            record = None
+
+            if department == "financial":
+                financial = self.create_window("financial", "IPLMS - Invoice Generator",
+                                               self.financial_ui.get_layout())
+                update_client_list(self, financial, "_FA_CLIENT_CB_")
+                flag = True
+                while flag:
+                    event3, values3 = financial.read()
+                    print(event3, values3)
+                    financial_logic = Financial(self, event3, values3, record)
+                    flag = financial_logic.run(self)
+                    record = flag
+                break
+            elif department == "packing":
+                packing = self.create_window("packing", "IPLMS - Packing List Generator",
+                                             self.packing_ui.get_layout())
+                update_client_list(self, packing, "_PL_CLIENT_CB_")
+                flag = True
+                while flag:
+                    event3, values3 = packing.read()
+                    print(event3, values3)
+                    packing_logic = Packing(self, event3, values3, record)
+                    flag = packing_logic.run(self)
+                    record = flag
+                break
+            elif department == "admin":
+                header_list = ["Invoice No.", "Client Name", "Data", "Goods description"]
+                self.admin_ui.set_table(header_list, self.pck_inv_data_obj.data_map)
+                admin = self.create_window("admin", "Invoice and Packing List Management System",
+                                           self.admin_ui.get_layout())
+                flag = True
+                while flag:
+                    event3, values3 = admin.read()
+                    print(event3, values3)
+                    admin_logic = Admin(self, event3, values3)
+                    flag = admin_logic.run(self)
                 break
 
     # Override

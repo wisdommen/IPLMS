@@ -13,7 +13,8 @@ class Admin_UI(UI):
     # initiate the layout
     def __init__(self):
 
-        self.header_list = ["Invoice No.", "Client Name", "Data", "Goods description"]
+        self.header_list = ["Invoice No.", "Client Name", "Date", "Goods description"]
+        self.conditions = ["Invoice No.", "Client Name", "S/C No.", "Date", "Destination port", "Goods description"]
         self.data_list = []
         self.data = make_table(1, len(self.header_list), self.data_list)
 
@@ -29,7 +30,7 @@ class Admin_UI(UI):
              sg.Radio('Packing list', "RADIO1", default=False, size=(10, 1), text_color="black",
                       background_color="white", key="_AD_PKL_RAD_")],
             [sg.Text("Search by:", size=(10, 1), background_color="white", text_color="black"),
-             sg.InputCombo(('Condition 1', 'Condition 2'), size=(23, 1), key="_AD_SCB_IPC_")],
+             sg.InputCombo(values=self.conditions, size=(23, 1), key="_AD_SCB_IPC_")],
             [sg.Text("Key words:", size=(10, 1), background_color="white", text_color="black"),
              sg.InputText(key="_AD_KEY_IP_", size=(25, 1), enable_events=True),
              sg.Button("Search", size=(10, 1), key="_AD_SEARCH_BTN")],

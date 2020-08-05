@@ -12,6 +12,7 @@ def create_new_client(main):
     event4, values4 = client.read()
     print(event4, values4)
     client_logic = Client(main, event4, values4)
-    client_logic.run(main)
+    name = client_logic.run(main)
     client.hide()
+    return name
 

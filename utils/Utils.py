@@ -35,8 +35,19 @@ def load_record(logic_class, main, data_obj, window_id, field_data):
         record = open_record_logic.run(opened_records, header)
     if event != "_OR_CAN_BTN_":
         if event == "_OR_DEL_BTN_":
+            # TODO ask for confirm
             logic_class.remove_record(record)
+            load_record(logic_class, main, data_obj, window_id, field_data)
+            # TODO show message box
+            return True
         window = main.windows_map[window_id]
         for each in field_data.keys():
             window[each].Update(record[field_data[each]])
     return record
+
+
+def update_client_list(main, window, field_name):
+    clients = []
+    for each in main.client_data_obj.data_map:
+        clients.append(each["Client Name"])
+    window[field_name].Update(values=clients)
