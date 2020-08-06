@@ -6,8 +6,9 @@ import PySimpleGUI as sg
 from beans.ClientData import ClientData
 from beans.PackingInvoiceData import PackingInvoiceData
 from beans.UserData import UserData
-from ui.LoginUI import Login_UI, MessageBox_UI
+from ui.LoginUI import Login_UI
 from ui.FinancialUI import Financial_UI
+from ui.MessageBoxUI import MessageBox_UI
 from ui.OpenRecordUI import OpenRecord_UI
 from ui.PackingUI import Packing_UI
 from ui.AdminUI import Admin_UI

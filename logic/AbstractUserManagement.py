@@ -12,7 +12,7 @@ class AbstractUserManagementClass(AbstractLogicClass, metaclass=ABCMeta):
     def save(self, main, field_map):
         for each in field_map.keys():
             self.record[field_map[each]] = self.values[each]
-        self.add_record(self.record, "department")
+        self.update_record(self.record, "department")
 
     @abstractmethod
     def run(self, main):

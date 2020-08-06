@@ -52,25 +52,3 @@ class Login_UI(UI):
             [sg.Column(column_cross, background_color="light gray", justification="right")],
             [sg.Column(column_all, pad=(20, 10), background_color="light gray", justification="center")]
         ]
-
-
-"""
-Summary: Show message boxes
-"""
-
-
-class MessageBox_UI(object):
-    _warning = "WARNING!"
-    _info = "INFO"
-    _error = "ERROR"
-
-    # the following methods are different kind of message boxes
-
-    def show_warning_box(self, message):
-        sg.popup(self._warning, message, text_color="red", background_color="white", keep_on_top=True)
-
-    def show_error_box(self, message):
-        sg.popup(self._error, message, background_color="orange", text_color="red", keep_on_top=True)
-
-    def show_info_box(self, message):
-        sg.popup_ok(self._info, message, text_color="black", background_color="white", keep_on_top=True)

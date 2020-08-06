@@ -37,13 +37,19 @@ def load_record(logic_class, main, data_obj, window_id, field_data):
         if event == "_OR_DEL_BTN_":
             # TODO ask for confirm
             logic_class.remove_record(record)
+            logic_class.save(logic_class.data_map)
             load_record(logic_class, main, data_obj, window_id, field_data)
             # TODO show message box
             return True
-        window = main.windows_map[window_id]
-        for each in field_data.keys():
-            window[each].Update(record[field_data[each]])
+        load_exist_record(main, window_id, field_data, record)
     return record
+
+
+def load_exist_record(main, window_id, field_data, record):
+    window = main.windows_map[window_id]
+    keys = check_elements_exist(window, field_data)
+    for each in keys:
+        window[each].Update(record[field_data[each]])
 
 
 def update_client_list(main, window, field_name):
@@ -51,3 +57,22 @@ def update_client_list(main, window, field_name):
     for each in main.client_data_obj.data_map:
         clients.append(each["Client Name"])
     window[field_name].Update(values=clients)
+
+
+def update_admin_table(main, data_list):
+    header_list = ["Invoice No.", "Client Name", "Date", "Goods description"]
+    data = [[j for j in range(4)] for i in range(len(data_list))]
+    for i in range(0, len(data_list)):
+        record = []
+        for each in header_list:
+            record.append(data_list[i][each])
+        data[i] = record
+    main.windows_map["admin"]["_AD_RET_TABLE_"].Update(values=data)
+
+
+def check_elements_exist(window, field_data):
+    elements = []
+    for element in window.element_list():
+        if element.Key in field_data.keys():
+            elements.append(element.Key)
+    return elements

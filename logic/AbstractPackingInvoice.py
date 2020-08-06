@@ -12,16 +12,10 @@ class AbstractPackingInvoiceClass(AbstractLogicClass, metaclass=ABCMeta):
         self.values = values
         self.record = record
 
-    def add_record(self, record_map, record_id):
-        for each in self.data_map:
-            if each[record_id] == record_map[record_id]:
-                self.data_map.remove(each)
-        self.data_map.append(record_map)
-
     def save(self, main, field_map):
         for each in field_map.keys():
             self.record[field_map[each]] = self.values[each]
-        self.add_record(self.record, "Invoice No.")
+        self.update_record(self.record, "Invoice No.")
 
     @abstractmethod
     def run(self, main):

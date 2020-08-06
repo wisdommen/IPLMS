@@ -48,14 +48,10 @@ class ClientData(DataMap):
                 records.append(record)
             try:
                 if len(records) > 1:
-                    for each in records:
-                        for string in each:
-                            if string != '':
-                                with open(self.get_file_path(self._file_name), "w", encoding='utf8', newline='') as f:
-                                    writer = csv.writer(f)
-                                    writer.writerow(self.header)
-                                    for record in records:
-                                        writer.writerow(record)
-                                return
+                    with open(self.get_file_path(self._file_name), "w", encoding='utf8', newline='') as f:
+                        writer = csv.writer(f)
+                        writer.writerow(self.header)
+                        for record in records:
+                            writer.writerow(record)
             except PermissionError:
                 return False

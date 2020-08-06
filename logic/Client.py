@@ -39,4 +39,4 @@ class Client(AbstractLogicClass):
                 self.record["Client ID"] = window["_CLIENT_ID_"].DisplayText
                 continue
             self.record[field_data[each]] = self.values[each]
-        self.add_record(self.record, "Client ID")
+        self.update_record(self.record, "Client ID")

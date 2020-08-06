@@ -12,7 +12,6 @@ class Admin_UI(UI):
 
     # initiate the layout
     def __init__(self):
-
         self.header_list = ["Invoice No.", "Client Name", "Date", "Goods description"]
         self.conditions = ["Invoice No.", "Client Name", "S/C No.", "Date", "Destination port", "Goods description"]
         self.data_list = []
@@ -33,14 +32,18 @@ class Admin_UI(UI):
              sg.InputCombo(values=self.conditions, size=(23, 1), key="_AD_SCB_IPC_")],
             [sg.Text("Key words:", size=(10, 1), background_color="white", text_color="black"),
              sg.InputText(key="_AD_KEY_IP_", size=(25, 1), enable_events=True),
-             sg.Button("Search", size=(10, 1), key="_AD_SEARCH_BTN")],
-            [sg.Table(self.data, bind_return_key=True, key="_AD_RET_TABLE_", justification="center",
-                      headings=self.header_list, auto_size_columns=True, alternating_row_color='blue',
-                      size=(30,20))],
+             sg.Button("Search", size=(10, 1), key="_AD_SEARCH_BTN")]
+        ]
+
+        table = [
+            [sg.Table(values=self.data, bind_return_key=True, key="_AD_RET_TABLE_", justification="center",
+                      headings=self.header_list, auto_size_columns=False, alternating_row_color='blue',
+                      num_rows=20, col_widths=[10, 10, 15, 20])]
         ]
 
         buttons2 = [
-            [sg.Button("Open by Excel", pad=(10, 1), size=(13, 1), button_color=("black", "light gray"), key="_AD_OPEN_BTN_"),
+            [sg.Button("Open by Excel", pad=(10, 1), size=(13, 1), button_color=("black", "light gray"),
+                       key="_AD_OPEN_BTN_"),
              sg.Button("Edit", pad=(10, 1), size=(13, 1), button_color=("black", "light gray"), key="_AD_EDIT_BTN_"),
              sg.Button("Delete", pad=(10, 1), size=(13, 1), button_color=("black", "light gray"), key="_AD_DEL_BTN_")]
         ]
@@ -54,6 +57,7 @@ class Admin_UI(UI):
         column_all = [
             [sg.Column(title, background_color="white", key="_AD_TITL_", justification="center")],
             [sg.Column(column1, background_color="white", key="_AD_COLUMN_1_", justification="center")],
+            [sg.Column(table, background_color="white", justification="center")],
             [sg.Column(buttons2, pad=(10, 10), background_color="white", justification="center")],
             [sg.Column(buttons, pad=(10, 50), background_color="white", justification="center")],
         ]

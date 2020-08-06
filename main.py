@@ -7,7 +7,7 @@ from main.MainApplication import MainApplication
 import PySimpleGUI as sg
 
 from utils import Config
-from utils.Utils import update_client_list
+from utils.Utils import update_client_list, update_admin_table
 
 
 class main(MainApplication):
@@ -81,10 +81,9 @@ class main(MainApplication):
                     record = flag
                 break
             elif department == "admin":
-                header_list = ["Invoice No.", "Client Name", "Data", "Goods description"]
-                self.admin_ui.set_table(header_list, self.pck_inv_data_obj.data_map)
                 admin = self.create_window("admin", "Invoice and Packing List Management System",
                                            self.admin_ui.get_layout())
+                update_admin_table(self, self.pck_inv_data_obj.data_map)
                 flag = True
                 while flag:
                     event3, values3 = admin.read()

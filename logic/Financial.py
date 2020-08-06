@@ -37,11 +37,13 @@ class Financial(AbstractPackingInvoiceClass):
                 if each != "":
                     self.save(main, field_data)
                     clear_all_input(main.windows_map["financial"], self.values)
+                    main.pck_inv_data_obj.save_data(self.data_map)
                     break
                     # TODO show message box
             # TODO show message box
             return True
         elif self.event == "_FA_QUIT_BTN_" or self.event is None:
+            main.windows_map["financial"].hide()
             # TODO ask for saving the unsaved changes
             return False
         else:
