@@ -54,12 +54,11 @@ class DataMap(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def save_data(self, data_list):
+    def save_data(self):
         """
         Save the data from the memory to the disk.
         Save the file with data validation.
 
-        :param data_list: a list of data map contains all data which need to be saved
         :return: void
         """
         pass

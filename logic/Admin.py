@@ -1,7 +1,7 @@
 from logic.AbstractPackingInvoice import AbstractPackingInvoiceClass
 from logic.Financial import Financial
 from logic.Packing import Packing
-from utils.Utils import update_client_list, load_exist_record, update_admin_table
+from utils.Utils import update_client_list, load_exist_record, update_admin_table, disable_unnecessary_buttons
 
 
 class Admin(AbstractPackingInvoiceClass):
@@ -32,20 +32,15 @@ class Admin(AbstractPackingInvoiceClass):
             # TODO complete open the record by excel(generate the excel file)
             return True
         elif self.event == "_AD_EDIT_BTN_":
-            # TODO complete opening a window that can modify the record
-            try:
-                info = main.windows_map["admin"]['_AD_RET_TABLE_'].get()[self.values["_AD_RET_TABLE_"][0]]
-            except IndexError:
-                # TODO show message box (Please select a record)
+            # opening a window that can modify the record
+            record = self.get_selected_record(main)
+            # if record is false means there is no record selected
+            if not record:
                 return True
-            record = {}
-            for each in self.data_map:
-                if each["Invoice No."] == info[0]:
-                    record = each
-
             if self.values["_AD_PKL_RAD_"]:
                 packing = main.create_window("packing", "IPLMS - Packing List Generator",
                                              main.packing_ui.get_layout())
+                disable_unnecessary_buttons(main.windows_map["packing"], ["_PL_LOAD_BTN_"])
                 update_client_list(main, packing, "_PL_CLIENT_CB_")
                 load_exist_record(main, "packing", field_data, record)
                 packing.un_hide()
@@ -60,6 +55,7 @@ class Admin(AbstractPackingInvoiceClass):
             elif self.values["_AD_INV_RAD_"]:
                 financial = main.create_window("financial", "IPLMS - Invoice Generator",
                                                main.financial_ui.get_layout())
+                disable_unnecessary_buttons(main.windows_map["financial"], ["_FA_LOAD_BTN_"])
                 update_client_list(main, financial, "_FA_CLIENT_CB_")
                 load_exist_record(main, "financial", field_data, record)
                 financial.un_hide()
@@ -74,11 +70,19 @@ class Admin(AbstractPackingInvoiceClass):
             update_admin_table(main, main.pck_inv_data_obj.data_map)
             return True
         elif self.event == "_AD_DEL_BTN_":
-            # TODO delete a selected record
+            # delete a selected record
+            record = self.get_selected_record(main)
+            self.remove_record(record)
+            main.pck_inv_data_obj.save_data()
+            update_admin_table(main, main.pck_inv_data_obj.data_map)
             # TODO show message box
             return True
-        elif self.event == "_AD_SEARCH_BTN":
-            # TODO the search
+        elif self.event == "_AD_SEARCH_BTN_":
+            # the search
+            condition = self.values["_AD_SCB_IPC_"]
+            key_word = self.values["_AD_KEY_IP_"]
+            result = self.search_record(condition, key_word)
+            update_admin_table(main, result)
             return True
         elif self.event == "_AD_UGM_BTN_":
             # user_manage = main.create_window("user_manage", "IPLMS",
@@ -97,4 +101,29 @@ class Admin(AbstractPackingInvoiceClass):
         else:
             return True
 
+    def get_selected_record(self, main):
+        try:
+            info = main.windows_map["admin"]['_AD_RET_TABLE_'].get()[self.values["_AD_RET_TABLE_"][0]]
+        except IndexError:
+            # TODO show message box (Please select a record)
+            return False
+        record = {}
+        for each in self.data_map:
+            if each["Invoice No."] == info[0]:
+                record = each
+                break
+        return record
 
+    def search_record(self, condition, key):
+        result = []
+        order = "ASC"
+        if "(" in condition:
+            order = condition.split("(")[1].replace(")", "")
+            condition = condition.split("(")[0]
+        for each in self.data_map:
+            if key in str(each[condition]):
+                result.append(each)
+        if order == "DESC":
+            return sorted(result, key=lambda res: res[condition], reverse=True)
+        else:
+            return sorted(result, key=lambda res: res[condition])

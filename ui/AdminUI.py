@@ -13,7 +13,11 @@ class Admin_UI(UI):
     # initiate the layout
     def __init__(self):
         self.header_list = ["Invoice No.", "Client Name", "Date", "Goods description"]
-        self.conditions = ["Invoice No.", "Client Name", "S/C No.", "Date", "Destination port", "Goods description"]
+        self.conditions = ["Invoice No.(ASC)", "Client Name(ASC)", "S/C No.(ASC)", "Date(ASC)", "Destination port(ASC)",
+                           "Goods description(ASC)", "Net weight(ASC)", "Bags(ASC)", "Quantity(ASC)",
+                           "Total Measurement(ASC)", "Invoice No.(DESC)", "Client Name(DESC)", "S/C No.(DESC)",
+                           "Date(DESC)", "Destination port(DESC)", "Goods description(DESC)", "Net weight(DESC)",
+                           "Bags(DESC)", "Quantity(DESC)", "Total Measurement(DESC)"]
         self.data_list = []
         self.data = make_table(1, len(self.header_list), self.data_list)
 
@@ -32,13 +36,13 @@ class Admin_UI(UI):
              sg.InputCombo(values=self.conditions, size=(23, 1), key="_AD_SCB_IPC_")],
             [sg.Text("Key words:", size=(10, 1), background_color="white", text_color="black"),
              sg.InputText(key="_AD_KEY_IP_", size=(25, 1), enable_events=True),
-             sg.Button("Search", size=(10, 1), key="_AD_SEARCH_BTN")]
+             sg.Button("Search", size=(10, 1), key="_AD_SEARCH_BTN_")]
         ]
 
         table = [
             [sg.Table(values=self.data, bind_return_key=True, key="_AD_RET_TABLE_", justification="center",
                       headings=self.header_list, auto_size_columns=False, alternating_row_color='blue',
-                      num_rows=20, col_widths=[10, 10, 15, 20])]
+                      num_rows=20, col_widths=[10, 10, 15, 20], enable_events=True)]
         ]
 
         buttons2 = [
@@ -50,7 +54,7 @@ class Admin_UI(UI):
 
         buttons = [
             [sg.Button("User Group Management", pad=(20, 1), size=(20, 1), button_color=("black", "light gray"),
-                       key="_AD_UGM_BTN_"),
+                       key="_AD_UGM_BTN_", disabled=True),
              sg.Button("Quit", pad=(20, 1), size=(20, 1), button_color=("black", "light gray"), key="_AD_QUIT_BTN_")]
         ]
 

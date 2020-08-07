@@ -38,10 +38,10 @@ class ClientData(DataMap):
             return False
 
     # Overriding method
-    def save_data(self, data_list):
-        if len(data_list) > 0:
+    def save_data(self):
+        if len(self.data_map) > 0:
             records = []
-            for data_map in data_list:
+            for data_map in self.data_map:
                 record = []
                 for each in self.header:
                     record.append(data_map.get(each, ""))

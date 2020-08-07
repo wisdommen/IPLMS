@@ -95,7 +95,7 @@ class main(MainApplication):
     # Override
     def on_disable(self):
         for each_data in self.data.keys():
-            if each_data.save_data(self.data[each_data]) is False:
+            if each_data.save_data() is False:
                 print("Permission error")
         for window in self.windows_map.values():
             window.close()

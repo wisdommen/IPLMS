@@ -37,7 +37,7 @@ def load_record(logic_class, main, data_obj, window_id, field_data):
         if event == "_OR_DEL_BTN_":
             # TODO ask for confirm
             logic_class.remove_record(record)
-            logic_class.save(logic_class.data_map)
+            data_obj.save_data()
             load_record(logic_class, main, data_obj, window_id, field_data)
             # TODO show message box
             return True
@@ -76,3 +76,8 @@ def check_elements_exist(window, field_data):
         if element.Key in field_data.keys():
             elements.append(element.Key)
     return elements
+
+
+def disable_unnecessary_buttons(window, keys):
+    for each in keys:
+        window[each].Update(disabled=True)

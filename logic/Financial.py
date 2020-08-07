@@ -36,8 +36,8 @@ class Financial(AbstractPackingInvoiceClass):
             for each in self.values.values():
                 if each != "":
                     self.save(main, field_data)
-                    clear_all_input(main.windows_map["financial"], self.values)
-                    main.pck_inv_data_obj.save_data(self.data_map)
+                    # clear_all_input(main.windows_map["financial"], self.values)
+                    main.pck_inv_data_obj.save_data()
                     break
                     # TODO show message box
             # TODO show message box
