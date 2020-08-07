@@ -39,24 +39,34 @@ class Packing(AbstractPackingInvoiceClass):
             # opening a record select window and load a record to fields
             return load_record(self, main, main.pck_inv_data_obj, "packing", field_data)
         elif self.event == "_PL_CLA_BTN_":
-            # TODO show message box
-            clear_all_input(main.windows_map["packing"], self.values)
+            # show message box
+            if main.mg.show_ask_box("Are you sure to clear all inputs?") == "Yes":
+                clear_all_input(main.windows_map["financial"], self.values)
             return True
         elif self.event == "_PL_SAVE_BTN_":
             # save the record
             for each in self.values.values():
                 if each != "":
+                    # TODO check validation
                     self.save(main, field_data)
-                    # clear_all_input(main.windows_map["packing"], self.values)
+                    # clear_all_input(main.windows_map["financial"], self.values)
                     main.pck_inv_data_obj.save_data()
-                    break
-                    # TODO show message box
-            # TODO show message box
+                    # show message box
+                    main.mg.show_info_box("Record Saved!")
+                    return True
+            # show message box
+            main.mg.show_warning_box("There is nothing to save!")
             return True
         elif self.event == "_PL_QUIT_BTN_" or self.event is None:
             main.windows_map["packing"].hide()
-            # TODO show message box
-            # TODO ask for saving the unsaved changes
-            return False
+            # ask for saving the unsaved changes
+            if main.mg.show_ask_box("Are you sure to quit?") == "Yes":
+                if main.mg.show_ask_box("Would you like to save?") == "Yes":
+                    self.save(main, field_data)
+                    main.pck_inv_data_obj.save_data()
+                    # show message box
+                    main.mg.show_info_box("Record Saved!")
+                return False
+            main.windows_map["packing"].un_hide()
         else:
             return True

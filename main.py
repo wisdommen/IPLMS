@@ -50,7 +50,8 @@ class main(MainApplication):
             login_logic = Login(values["_USERNAME_"], values["_PASSWORD_"])
             passport = login_logic.get_login(self.user_data_obj)
             if not passport:
-                # TODO show message box
+                # show message box
+                main.mg.show_warning_box("Your username or password is not correct!")
                 continue
             department = login_logic.get_department()
             login.hide()

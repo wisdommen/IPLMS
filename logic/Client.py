@@ -18,8 +18,10 @@ class Client(AbstractLogicClass):
             "_CP_ADDRESS_IP_": "Client Address"
         }
         if self.event == "_CP_SAVE_BTN_":
+            # TODO check validation
             self.save(main, field_data)
-            # TODO show message box
+            # show message box
+            main.mg.show_info_box("Record Saved!")
             return self.values.get("_CP_NAME_IP_", "")
         elif self.event == "_CP_CANCEL_BTN":
             return ""

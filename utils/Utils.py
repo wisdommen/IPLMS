@@ -34,12 +34,13 @@ def load_record(logic_class, main, data_obj, window_id, field_data):
         open_record_logic = OpenRecord(event, values)
         record = open_record_logic.run(opened_records, header)
     if event != "_OR_CAN_BTN_":
-        if event == "_OR_DEL_BTN_":
-            # TODO ask for confirm
+        if event == "_OR_DEL_BTN_" and main.mg.show_ask_box("Are you sure to delete the record?") == "Yes":
+            # ask for confirm
             logic_class.remove_record(record)
             data_obj.save_data()
             load_record(logic_class, main, data_obj, window_id, field_data)
-            # TODO show message box
+            # show message box
+            main.mg.show_info_box("Record Deleted!")
             return True
         load_exist_record(main, window_id, field_data, record)
     return record

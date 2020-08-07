@@ -22,4 +22,4 @@ class MessageBox_UI(object):
         sg.popup_ok(self._info, message, text_color="black", background_color="white", keep_on_top=True)
 
     def show_ask_box(self, message):
-        sg.popup_ok_cancel(self._info, message, text_color="black", background_color="white", keep_on_top=True)
+        return sg.popup_yes_no(self._info, message, text_color="black", background_color="white", keep_on_top=True)

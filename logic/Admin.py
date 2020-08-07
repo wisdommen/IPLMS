@@ -72,16 +72,18 @@ class Admin(AbstractPackingInvoiceClass):
         elif self.event == "_AD_DEL_BTN_":
             # delete a selected record
             record = self.get_selected_record(main)
-            self.remove_record(record)
-            main.pck_inv_data_obj.save_data()
-            update_admin_table(main, main.pck_inv_data_obj.data_map)
-            # TODO show message box
+            if main.mg.show_ask_box("Are you sure to delete the record?") == "Yes":
+                self.remove_record(record)
+                main.pck_inv_data_obj.save_data()
+                update_admin_table(main, main.pck_inv_data_obj.data_map)
+                # show message box
+                main.mg.show_info_box("Record Deleted!")
             return True
         elif self.event == "_AD_SEARCH_BTN_":
             # the search
             condition = self.values["_AD_SCB_IPC_"]
             key_word = self.values["_AD_KEY_IP_"]
-            result = self.search_record(condition, key_word)
+            result = self.search_record(main, condition, key_word)
             update_admin_table(main, result)
             return True
         elif self.event == "_AD_UGM_BTN_":
@@ -95,9 +97,12 @@ class Admin(AbstractPackingInvoiceClass):
             # user_manage.hide()
             return True
         elif self.event == "_AD_QUIT_BTN_" or self.event is None:
-            # TODO show message box
-            # TODO ask for saving the unsaved changes
-            return False
+            # show message box confirm quit
+            main.windows_map["admin"].hide()
+            if main.mg.show_ask_box("Are you sure to quit?") == "Yes":
+                return False
+            main.windows_map["admin"].un_hide()
+            return True
         else:
             return True
 
@@ -105,7 +110,8 @@ class Admin(AbstractPackingInvoiceClass):
         try:
             info = main.windows_map["admin"]['_AD_RET_TABLE_'].get()[self.values["_AD_RET_TABLE_"][0]]
         except IndexError:
-            # TODO show message box (Please select a record)
+            # show message box (Please select a record)
+            main.mg.show_warning_box("Please select a record!")
             return False
         record = {}
         for each in self.data_map:
@@ -114,9 +120,13 @@ class Admin(AbstractPackingInvoiceClass):
                 break
         return record
 
-    def search_record(self, condition, key):
+    def search_record(self, main, condition, key):
         result = []
         order = "ASC"
+        if condition == "":
+            # show condition show not be empty
+            main.mg.show_warning_box("Search condition should not be empty!")
+            return self.data_map
         if "(" in condition:
             order = condition.split("(")[1].replace(")", "")
             condition = condition.split("(")[0]

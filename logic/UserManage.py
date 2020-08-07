@@ -23,11 +23,11 @@ class UserManage(AbstractUserManagementClass):
             self.run(main)
             return True
         elif self.event == "_UM_SAVE_BTN_":
-            # TODO save the user to data_map
+            # save the user to data_map
             # self.save(main, field_data)
             return True
         elif self.event == "_UM_QUIT_BTN_" or self.event is None:
-            # TODO ask for saving the unsaved changes
+            # ask for saving the unsaved changes
             return False
         else:
             return True
