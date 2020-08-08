@@ -37,7 +37,7 @@ class Financial(AbstractPackingInvoiceClass):
             print(self.record)
             for each in self.values.values():
                 if each != "":
-                    # TODO check validation
+                    # check validation
                     result = validate_input(main.financial_ui, field_data, self.values)
                     if len(result) > 0:
                         string_builder = ""

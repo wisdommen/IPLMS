@@ -19,7 +19,7 @@ class Client(AbstractLogicClass):
             "_CP_ADDRESS_IP_": "Client Address"
         }
         if self.event == "_CP_SAVE_BTN_":
-            # TODO check validation
+            # check validation
             result = validate_input(main.client_ui, field_data, self.values)
             if len(result) > 0:
                 string_builder = ""
