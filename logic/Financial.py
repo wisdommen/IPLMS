@@ -59,6 +59,14 @@ class Financial(AbstractPackingInvoiceClass):
             # ask for saving the unsaved changes
             if main.mg.show_ask_box("Are you sure to quit the edit window?") == "Yes":
                 if main.mg.show_ask_box("Would you like to save?") == "Yes":
+                    result = validate_input(main.financial_ui, field_data, self.values)
+                    if len(result) > 0:
+                        string_builder = ""
+                        for string in result:
+                            string_builder = string_builder + string + "\n"
+                        main.mg.show_warning_box(string_builder)
+                        main.windows_map["financial"].un_hide()
+                        return True
                     self.save(main, field_data)
                     main.pck_inv_data_obj.save_data()
                     # show message box

@@ -70,7 +70,7 @@ class Packing_UI(UI):
              sg.Button("", size=(20, 1), button_color=("black", "light gray"), key="_PL_CLA_BTN_",
                        image_data=clear_btn_ioc, border_width=0, tooltip="Clear All"),
              sg.Button("", size=(20, 1), button_color=("black", "light gray"), key="_PL_QUIT_BTN_",
-                       image_data=quit_btn_ioc, border_width=0, tooltip="Quit the program")]
+                       image_data=quit_btn_ioc, border_width=0, tooltip="Quit the edit window")]
         ]
 
         column_all = [
