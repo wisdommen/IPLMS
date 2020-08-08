@@ -1,11 +1,12 @@
+from main.MainApplication import MainApplication
 from utils.ClientUtils import create_new_client
-from utils.Utils import clear_all_input, load_record, update_client_list
+from utils.Utils import clear_all_input, load_record, update_client_list, validate_input
 from logic.AbstractPackingInvoice import AbstractPackingInvoiceClass
 
 
 class Financial(AbstractPackingInvoiceClass):
 
-    def run(self, main):
+    def run(self, main: MainApplication) -> bool:
         field_data = {
             "_FA_CLIENT_CB_": "Client Name",
             "_FA_INV_IP_": "Invoice No.",
@@ -37,6 +38,13 @@ class Financial(AbstractPackingInvoiceClass):
             for each in self.values.values():
                 if each != "":
                     # TODO check validation
+                    result = validate_input(main.financial_ui, field_data, self.values)
+                    if len(result) > 0:
+                        string_builder = ""
+                        for string in result:
+                            string_builder = string_builder + string + "\n"
+                        main.mg.show_warning_box(string_builder)
+                        return True
                     self.save(main, field_data)
                     # clear_all_input(main.windows_map["financial"], self.values)
                     main.pck_inv_data_obj.save_data()
@@ -49,7 +57,7 @@ class Financial(AbstractPackingInvoiceClass):
         elif self.event == "_FA_QUIT_BTN_" or self.event is None:
             main.windows_map["financial"].hide()
             # ask for saving the unsaved changes
-            if main.mg.show_ask_box("Are you sure to quit?") == "Yes":
+            if main.mg.show_ask_box("Are you sure to quit the edit window?") == "Yes":
                 if main.mg.show_ask_box("Would you like to save?") == "Yes":
                     self.save(main, field_data)
                     main.pck_inv_data_obj.save_data()

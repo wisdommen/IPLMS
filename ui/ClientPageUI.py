@@ -58,3 +58,6 @@ class Client_UI(UI):
             [sg.Menu(menu_def, )],
             [sg.Column(column_all, pad=(20, 10), background_color="white", justification="center")]
         ]
+
+    def get_need_validate_fields(self):
+        return {"_CP_PHONE_IP_": "[^0-9 +]"}

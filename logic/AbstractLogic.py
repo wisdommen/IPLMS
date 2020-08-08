@@ -6,7 +6,7 @@ class AbstractLogicClass(metaclass=ABCMeta):
         self.data_map = None
         self.record = {}
 
-    def update_record(self, record_map, record_id):
+    def update_record(self, record_map: map, record_id: str) -> None:
         for each in self.data_map:
             # UPDATE DATA IF EXISTS
             if each[record_id] == record_map[record_id]:
@@ -15,7 +15,7 @@ class AbstractLogicClass(metaclass=ABCMeta):
                 return
         self.data_map.append(record_map)
 
-    def remove_record(self, record_map):
+    def remove_record(self, record_map: map) -> None:
         self.data_map.remove(record_map)
 
     @abstractmethod

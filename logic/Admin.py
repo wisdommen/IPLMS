@@ -1,12 +1,13 @@
 from logic.AbstractPackingInvoice import AbstractPackingInvoiceClass
 from logic.Financial import Financial
 from logic.Packing import Packing
+from main.MainApplication import MainApplication
 from utils.Utils import update_client_list, load_exist_record, update_admin_table, disable_unnecessary_buttons
 
 
 class Admin(AbstractPackingInvoiceClass):
 
-    def run(self, main):
+    def run(self, main: MainApplication) -> bool:
         field_data = {
             "_FA_CLIENT_CB_": "Client Name",
             "_FA_INV_IP_": "Invoice No.",
@@ -106,7 +107,7 @@ class Admin(AbstractPackingInvoiceClass):
         else:
             return True
 
-    def get_selected_record(self, main):
+    def get_selected_record(self, main: MainApplication) -> map:
         try:
             info = main.windows_map["admin"]['_AD_RET_TABLE_'].get()[self.values["_AD_RET_TABLE_"][0]]
         except IndexError:
@@ -120,7 +121,7 @@ class Admin(AbstractPackingInvoiceClass):
                 break
         return record
 
-    def search_record(self, main, condition, key):
+    def search_record(self, main: MainApplication, condition: str, key: str) -> list:
         result = []
         order = "ASC"
         if condition == "":

@@ -29,7 +29,7 @@ Return: void; no return
 """
 
 
-def log(string: str, test=False):
+def log(string: str, test=False) -> None:
     if test:
         # In test condition
         # out put the message to logger

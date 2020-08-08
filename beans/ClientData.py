@@ -19,9 +19,9 @@ class ClientData(DataMap):
         """
         Initiate the class with these data
         """
+        super().__init__()
         self._file_name = "ClientData.csv"
         self.header = ["Client ID", "Client Name", "Client Phone Number", "Client Address"]
-        self.data_map = []
 
     # Overriding method
     def init_data(self):

@@ -73,3 +73,6 @@ class Admin_UI(UI):
     def set_table(self, header_list, data_list):
         self.header_list = header_list
         self.data_list = data_list
+
+    def get_need_validate_fields(self) -> map:
+        return {}

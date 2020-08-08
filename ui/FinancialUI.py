@@ -77,3 +77,12 @@ class Financial_UI(UI):
         self._layout = [
             [sg.Column(column_all, pad=(10, 10), background_color="white")]
         ]
+
+    def get_need_validate_fields(self) -> map:
+        return {
+            "_FA_INV_IP_": "[^0-9A-Za-z]",
+            "_FA_SC_IP_": "[^0-9A-Za-z]",
+            "_FA_DATE_IP_": "[^0-9 -:]",
+            "_FA_PRICE_SP_": "[^0-9.]",
+            "_FA_QUA_SP_": "[^0-9.]"
+        }

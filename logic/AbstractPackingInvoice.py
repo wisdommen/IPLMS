@@ -12,7 +12,7 @@ class AbstractPackingInvoiceClass(AbstractLogicClass, metaclass=ABCMeta):
         self.values = values
         self.record = record
 
-    def save(self, main, field_map):
+    def save(self, main, field_map: map) -> None:
         for each in field_map.keys():
             self.record[field_map[each]] = self.values[each]
         self.update_record(self.record, "Invoice No.")

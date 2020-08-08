@@ -1,8 +1,9 @@
 from logic.Client import Client
+from main.MainApplication import MainApplication
 from utils.Utils import getUUID
 
 
-def create_new_client(main):
+def create_new_client(main: MainApplication) -> str:
     client = main.create_window("client", "IPLMS", main.client_ui.get_layout(), disable_close=True)
     client["_CLIENT_ID_"].Update(getUUID())
     client["_CP_NAME_IP_"].Update("")

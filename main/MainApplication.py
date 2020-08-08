@@ -3,6 +3,9 @@ from abc import abstractmethod, ABCMeta
 import PySimpleGUI as sg
 
 # import ui
+from PySimpleGUI import Window
+
+from beans.AbstractDataMap import DataMap
 from beans.ClientData import ClientData
 from beans.PackingInvoiceData import PackingInvoiceData
 from beans.UserData import UserData
@@ -19,7 +22,7 @@ from ui.UserManagePageUI import UserMange_UI
 from concurrent.futures import ThreadPoolExecutor
 
 
-def init_data(data_type):
+def init_data(data_type: DataMap) -> DataMap:
     data_type.init_data()
     try:
         data_obj = data_type.data_map
@@ -63,23 +66,24 @@ class MainApplication(metaclass=ABCMeta):
 
     windows_map = {}
 
-    def create_window(self, id, name, layout, size=(0, 0), disable_close=False, reload=False):
-        if id not in self.windows_map.keys() or reload:
+    def create_window(self, window_id: str, window_name: str, layout: list, size=(0, 0), disable_close=False,
+                      reload=False) -> Window:
+        if window_id not in self.windows_map.keys() or reload:
             if size == (0, 0):
-                window = sg.Window(name, layout, auto_size_buttons=False, background_color="white", finalize=True,
-                                   disable_close=disable_close)
+                window = sg.Window(window_name, layout, auto_size_buttons=False, background_color="white",
+                                   finalize=True, disable_close=disable_close)
             else:
-                window = sg.Window(name, layout, auto_size_buttons=False, background_color="white", finalize=True,
-                                   disable_close=disable_close, size=size)
-            self.windows_map[id] = window
+                window = sg.Window(window_name, layout, auto_size_buttons=False, background_color="white",
+                                   finalize=True, disable_close=disable_close, size=size)
+            self.windows_map[window_id] = window
             return window
-        return self.windows_map[id]
+        return self.windows_map[window_id]
 
     @staticmethod
-    def create_open_record_window(row, col, data_list, header_list):
+    def create_open_record_window(row: int, col: int, data_list: list, header_list: list) -> Window:
         open_record_ui = OpenRecord_UI(row, col, data_list, header_list)
-        window = sg.Window("Choose the record", open_record_ui.get_layout(), auto_size_buttons=False, background_color="white", finalize=True,
-                           disable_close=True)
+        window = sg.Window("Choose the record", open_record_ui.get_layout(), auto_size_buttons=False,
+                           background_color="white", finalize=True, disable_close=True)
         return window
 
     @abstractmethod

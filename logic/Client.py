@@ -1,5 +1,6 @@
 from logic.AbstractLogic import AbstractLogicClass
-from utils.Utils import load_record
+from main.MainApplication import MainApplication
+from utils.Utils import load_record, validate_input
 
 
 class Client(AbstractLogicClass):
@@ -10,7 +11,7 @@ class Client(AbstractLogicClass):
         self.values = values
         self.record = {}
 
-    def run(self, main):
+    def run(self, main: MainApplication) -> str:
         field_data = {
             "_CLIENT_ID_": "Client ID",
             "_CP_NAME_IP_": "Client Name",
@@ -19,6 +20,16 @@ class Client(AbstractLogicClass):
         }
         if self.event == "_CP_SAVE_BTN_":
             # TODO check validation
+            result = validate_input(main.client_ui, field_data, self.values)
+            if len(result) > 0:
+                string_builder = ""
+                for each in result:
+                    string_builder = string_builder+each+"\n"
+                main.mg.show_warning_box(string_builder)
+                event, values = main.windows_map["client"].read()
+                self.event = event
+                self.values = values
+                self.run(main)
             self.save(main, field_data)
             # show message box
             main.mg.show_info_box("Record Saved!")
@@ -34,7 +45,7 @@ class Client(AbstractLogicClass):
             self.values = values
             self.run(main)
 
-    def save(self, main, field_data):
+    def save(self, main: MainApplication, field_data: map) -> None:
         window = main.windows_map["client"]
         for each in field_data.keys():
             if each == "_CLIENT_ID_":

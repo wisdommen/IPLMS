@@ -7,9 +7,9 @@ from utils.csvFileReader import read_csv_file
 class UserData(DataMap):
 
     def __init__(self):
+        super().__init__()
         self._file_name = "UserData.csv"
         self.header = ["department", "username", "password", "is_blocked"]
-        self.data_map = []
 
     # Override
     def init_data(self):

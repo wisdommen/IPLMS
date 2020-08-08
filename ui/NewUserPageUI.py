@@ -48,3 +48,6 @@ class NewUser_UI(UI):
         self._layout = [
             [sg.Column(column_all, pad=(20, 10), background_color="white", justification="center")]
         ]
+
+    def get_need_validate_fields(self) -> map:
+        return {}

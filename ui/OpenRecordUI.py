@@ -11,7 +11,7 @@ Summary: This class is the main body layout of the GUI
 class OpenRecord_UI(UI):
 
     # initiate the layout
-    def __init__(self, row, col, data_list, header_list):
+    def __init__(self, row: int, col: int, data_list: list, header_list: list):
         data = make_table(row, col, data_list)
 
         buttons = [
@@ -34,3 +34,6 @@ class OpenRecord_UI(UI):
                      text_color="black")],
             [sg.Column(column_all, pad=(20, 10), background_color="white", justification="center")]
         ]
+
+    def get_need_validate_fields(self) -> map:
+        return {}

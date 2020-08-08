@@ -52,3 +52,6 @@ class Login_UI(UI):
             [sg.Column(column_cross, background_color="light gray", justification="right")],
             [sg.Column(column_all, pad=(20, 10), background_color="light gray", justification="center")]
         ]
+
+    def get_need_validate_fields(self) -> map:
+        return {}

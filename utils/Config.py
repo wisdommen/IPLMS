@@ -13,18 +13,18 @@ except ModuleNotFoundError:
         exit(1)
 
 
-def is_config_exists():
+def is_config_exists() -> bool:
     return os.path.exists(os.getcwd() + "/config/config.yml")
 
 
-def get_config():
+def get_config() -> map:
     if is_config_exists():
         with open(os.getcwd() + "/config/config.yml") as f:
             config = yaml.load(f, Loader=yaml.FullLoader)
             return config
 
 
-def save_default_config():
+def save_default_config() -> None:
     config = {"enable_database": False, "ip": "localhost", "port": 3306, "username": "root", "password": "root",
               "database": "IPLMS"}
     if not os.path.exists(os.getcwd() + "/config"):

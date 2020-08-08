@@ -83,3 +83,14 @@ class Packing_UI(UI):
         self._layout = [
             [sg.Column(column_all, pad=(10, 10), background_color="white")]
         ]
+
+    def get_need_validate_fields(self) -> map:
+        return {
+            "_PL_INV_IP_": "[^0-9A-Za-z]",
+            "_PL_SC_IP_": "[^0-9A-Za-z]",
+            "_PL_DATE_IP_": "[^0-9 -:]",
+            "_PL_PACK_SP_": "[^0-9]",
+            "_PL_NET_SP_": "[^0-9.]",
+            "_PL_GROSS_SP_": "[^0-9.]",
+            "_PL_CBM_SP_": "[^0-9.]"
+        }

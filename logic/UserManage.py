@@ -1,10 +1,11 @@
 from logic.AbstractUserManagement import AbstractUserManagementClass
 from logic.NewUser import NewUser
+from main.MainApplication import MainApplication
 
 
 class UserManage(AbstractUserManagementClass):
 
-    def run(self, main):
+    def run(self, main: MainApplication) -> bool:
 
         if self.event == "_UM_CREATE_BTN_":
             new_user = main.create_window("new_user", "IPLMS",

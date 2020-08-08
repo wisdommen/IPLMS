@@ -1,9 +1,10 @@
 from logic.AbstractUserManagement import AbstractUserManagementClass
+from main.MainApplication import MainApplication
 
 
 class NewUser(AbstractUserManagementClass):
 
-    def run(self, main):
+    def run(self, main: MainApplication) -> bool:
         if self.event == "_NU_CREATE_BTN_":
             # save the entered information as user group
             return True

@@ -13,11 +13,11 @@ def init(path, header):
 class PackingInvoiceData(DataMap):
 
     def __init__(self):
+        super().__init__()
         self._file_name = "PackingInvoiceData.csv"
         self.header = ["Invoice No.", "Client Name", "S/C No.", "Date", "Destination port",
                        "Goods description", "Unit price", "Quantity", "Bags", "Net weight", "Gross weight",
                        "Total Measurement"]
-        self.data_map = []
 
     # Override
     def init_data(self):
