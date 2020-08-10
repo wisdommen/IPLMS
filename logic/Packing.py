@@ -9,6 +9,7 @@ class Packing(AbstractPackingInvoiceClass):
 
     """
 
+    # Overriding method
     def run(self, main: MainApplication) -> bool:
         """
 
@@ -42,7 +43,7 @@ class Packing(AbstractPackingInvoiceClass):
         elif self.event == "_PL_CLA_BTN_":
             # show message box
             if main.mg.show_ask_box("Are you sure to clear all inputs?") == "Yes":
-                clear_all_input(main.windows_map["financial"], self.values)
+                clear_all_input(main.windows_map["packing"], self.values)
             return True
         elif self.event == "_PL_SAVE_BTN_":
             # save the record
@@ -57,7 +58,7 @@ class Packing(AbstractPackingInvoiceClass):
                         main.mg.show_warning_box(string_builder)
                         return True
                     self.save(main, field_data)
-                    # clear_all_input(main.windows_map["financial"], self.values)
+                    # clear_all_input(main.windows_map["packing"], self.values)
                     main.pck_inv_data_obj.save_data()
                     # show message box
                     main.mg.show_info_box("Record Saved!")
