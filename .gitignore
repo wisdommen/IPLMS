@@ -215,8 +215,8 @@ cython_debug/
 
 .DS_Store
 .idea/vcs.xml
-beans/__pycache__/
-logic/__pycache__/
-main/__pycache__/
-ui/__pycache__/
-utils/__pycache__/
+src/beans/__pycache__/
+src/logic/__pycache__/
+src/main/__pycache__/
+src/ui/__pycache__/
+src/utils/__pycache__/
