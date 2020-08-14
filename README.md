@@ -9,11 +9,9 @@ Please search for login information in userData.csv
 
 If you meet any problem like above, please contact me on Teams.
 
-### Things are not implement in the program, but they are on the SRS
+### Things didn't not implement in the program, but they are in the SRS
 
 - EC_10 Create user group & EC_11 Manage user group & EC_31 A GUI for entering User group information
   
-  Explanation: Because of the time constrain, I deicided not to implement any futher about user group. I will finish them in the future. Such as add user gourp, modify user group and block user group.
-  
-- 
+  Explanation: Because of the time constrain, I decided not to implement any further about user group. I will finish them in the future. Such as add user group, modify user group and block user group.
   
