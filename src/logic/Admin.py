@@ -122,7 +122,7 @@ class Admin(AbstractPackingInvoiceClass):
             # user_manage_logic.run(main)
             # user_manage.hide()
             return True
-        elif self.event == "_AD_QUIT_BTN_" or self.event is None:
+        elif self.event == "_AD_QUIT_BTN_":
             # show message box confirm quit
             # hide the main window to prevent user change anything when answering quit confirmation
             main.windows_map["admin"].hide()
@@ -130,6 +130,8 @@ class Admin(AbstractPackingInvoiceClass):
                 return False
             main.windows_map["admin"].un_hide()
             return True
+        elif self.event is None:
+            return False
         else:
             return True
 

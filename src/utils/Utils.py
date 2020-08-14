@@ -201,6 +201,11 @@ def validate_input(window_ui: UI, field_map: map, values: map) -> list:
             results.append("In %s: Empty input" % field_map[each])
             continue
         validate_rule = fields[each]
+        if "_DATE_" in each:
+            if re.search(validate_rule, input_value) is None:
+                results.append("In Data and Time: Invalid Date or Time Format! \n"
+                               "       Please enter in this format YYYY-MM-DD HH:MM:SS")
+            continue
         # use regular expression to match the string if matched means not valid
         result = re.search(validate_rule, input_value)
         if result is not None:
@@ -216,6 +221,7 @@ def validate_input(window_ui: UI, field_map: map, values: map) -> list:
             end = input_value[result[1]:]
         except IndexError:
             end = ""
-        results.append("In %s: Invalid input marked inside the []\n   at \"%s[%s]%s\"" %
+        results.append("In %s: Invalid input marked inside the []\n"
+                       "       at \"%s[%s]%s\"" %
                        (field_map[each], start, input_value[result[0]:result[1]], end))
     return results

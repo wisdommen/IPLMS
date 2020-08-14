@@ -58,7 +58,7 @@ class Financial(AbstractPackingInvoiceClass):
             # show message box
             main.mg.show_warning_box("There is nothing to save!")
             return True
-        elif self.event == "_FA_QUIT_BTN_" or self.event is None:
+        elif self.event == "_FA_QUIT_BTN_":
             main.windows_map["financial"].hide()
             # ask for saving the unsaved changes
             if main.mg.show_ask_box("Are you sure to quit the edit window?") == "Yes":
@@ -78,5 +78,7 @@ class Financial(AbstractPackingInvoiceClass):
                 return False
             main.windows_map["financial"].un_hide()
             return True
+        elif self.event is None:
+            return False
         else:
             return True
