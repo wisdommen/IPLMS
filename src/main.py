@@ -8,6 +8,7 @@ import PySimpleGUI as sg
 
 from src.utils import Config
 from src.utils.Utils import update_client_list, update_admin_table
+from utils.logger import log
 
 
 class main(MainApplication):
@@ -23,8 +24,8 @@ class main(MainApplication):
 
         # if use database (not in use, please ignore)
         if config["enable_database"] == "true":
-            print("connecting to the database...")
-            print("")
+            log("connecting to the database...")
+            log("")
             pass
 
         # set up login page
@@ -42,7 +43,7 @@ class main(MainApplication):
             else:
                 login.grab_any_where_on()
 
-            print(event, values)
+            log(event + " " + str(values))
 
             # "X" on the windows top was pressed
             if event == "_LG_CROSS_":
@@ -67,9 +68,9 @@ class main(MainApplication):
                 update_client_list(self, financial, "_FA_CLIENT_CB_")
                 flag = True
                 while flag:
-                    event3, values3 = financial.read()
-                    print(event3, values3)
-                    financial_logic = Financial(self, event3, values3, record)
+                    event, values = financial.read()
+                    log(event + " " + str(values))
+                    financial_logic = Financial(self, event, values, record)
                     flag = financial_logic.run(self)
                     record = flag
                 break
@@ -80,9 +81,9 @@ class main(MainApplication):
                 update_client_list(self, packing, "_PL_CLIENT_CB_")
                 flag = True
                 while flag:
-                    event3, values3 = packing.read()
-                    print(event3, values3)
-                    packing_logic = Packing(self, event3, values3, record)
+                    event, values = packing.read()
+                    log(event + " " + str(values))
+                    packing_logic = Packing(self, event, values, record)
                     flag = packing_logic.run(self)
                     record = flag
                 break
@@ -93,9 +94,9 @@ class main(MainApplication):
                 update_admin_table(self, self.pck_inv_data_obj.data_map)
                 flag = True
                 while flag:
-                    event3, values3 = admin.read()
-                    print(event3, values3)
-                    admin_logic = Admin(self, event3, values3)
+                    event, values = admin.read()
+                    log(event + " " + str(values))
+                    admin_logic = Admin(self, event, values)
                     flag = admin_logic.run(self)
                 break
 
@@ -106,7 +107,7 @@ class main(MainApplication):
         # save the data and close windows
         for each_data in self.data.keys():
             if each_data.save_data() is False:
-                print("Permission error")
+                log("Permission error")
         for window in self.windows_map.values():
             window.close()
 

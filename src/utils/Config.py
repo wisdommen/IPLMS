@@ -1,15 +1,17 @@
 import os
 
 # import yaml module
+from utils.logger import log
+
 try:
     import yaml
 except ModuleNotFoundError:
-    print("WARNING! No module found, start installing the required module...")
+    log("WARNING! No module found, start installing the required module...")
     try:
         os.system("pip3 install PyYaml")
         import yaml
     except:
-        print("ERROR! Can't import required PyYaml module, stopping...")
+        log("ERROR! Can't import required PyYaml module, stopping...")
         exit(1)
 
 """

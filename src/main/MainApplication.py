@@ -21,6 +21,8 @@ from src.ui.UserManagePageUI import UserMange_UI
 
 from concurrent.futures import ThreadPoolExecutor
 
+from utils.logger import log
+
 
 def init_data(data_type: DataMap) -> DataMap:
     """ This method invoke the initiation method in each data object to initiate data.
@@ -66,8 +68,8 @@ class MainApplication(metaclass=ABCMeta):
             data[each] = result
 
     for each in data.keys():
-        print(each)
-        print(data[each])
+        log(str(each))
+        log(str(data[each]))
 
     # instantiate UI objects
     login_ui = Login_UI()

@@ -2,6 +2,7 @@ from src.main.MainApplication import MainApplication
 from src.utils.ClientUtils import create_new_client
 from src.utils.Utils import clear_all_input, load_record, update_client_list, validate_input
 from src.logic.AbstractPackingInvoice import AbstractPackingInvoiceClass
+from utils.logger import log
 
 
 class Financial(AbstractPackingInvoiceClass):
@@ -39,7 +40,7 @@ class Financial(AbstractPackingInvoiceClass):
             return True
         elif self.event == "_FA_SAVE_BTN_":
             # save the record
-            print(self.record)
+            log(self.record)
             for each in self.values.values():
                 if each != "":
                     # check validation

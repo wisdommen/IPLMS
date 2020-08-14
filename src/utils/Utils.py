@@ -7,6 +7,7 @@ from src.beans.AbstractDataMap import DataMap
 from src.logic import AbstractLogic
 from src.logic.OpenRcord import OpenRecord
 from src.ui.AbstractUI import UI
+from utils.logger import log
 
 
 def getUUID() -> int:
@@ -73,7 +74,7 @@ def load_record(logic_class: AbstractLogic, main, data_obj: DataMap, window_id: 
                                                     header)
     opened_records.un_hide()
     event, values = opened_records.read()
-    print(event, values)
+    log(event + " " + str(values))
     # create open record logic
     open_record_logic = OpenRecord(event, values)
     try:

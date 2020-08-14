@@ -1,6 +1,7 @@
 from src.logic.AbstractUserManagement import AbstractUserManagementClass
 from src.logic.NewUser import NewUser
 from src.main.MainApplication import MainApplication
+from utils.logger import log
 
 
 class UserManage(AbstractUserManagementClass):
@@ -19,9 +20,9 @@ class UserManage(AbstractUserManagementClass):
                                           disable_close=True)
             new_user.un_hide()
             new_user.bring_to_front()
-            event7, values7 = new_user.read()
-            print(event7, values7)
-            new_user_logic = NewUser(main, event7, values7)
+            event, values = new_user.read()
+            log(event + " " + str(values))
+            new_user_logic = NewUser(main, event, values)
             new_user_logic.run(main)
             new_user.hide()
             event, values = main.windows_map["user_manage"].read()

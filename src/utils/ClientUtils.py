@@ -1,6 +1,7 @@
 from src.logic.Client import Client
 from src.main.MainApplication import MainApplication
 from src.utils.Utils import getUUID
+from utils.logger import log
 
 
 def create_new_client(main: MainApplication) -> str:
@@ -19,7 +20,7 @@ def create_new_client(main: MainApplication) -> str:
     client["_CP_ADDRESS_IP_"].Update("")
     client.un_hide()
     event4, values4 = client.read()
-    print(event4, values4)
+    log(event4 + " " + values4)
     client_logic = Client(main, event4, values4)
     name = client_logic.run(main)
     client.hide()

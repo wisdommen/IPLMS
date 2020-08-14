@@ -2,6 +2,7 @@ from src.main.MainApplication import MainApplication
 from src.utils.ClientUtils import create_new_client
 from src.utils.Utils import clear_all_input, load_record, update_client_list, validate_input
 from src.logic.AbstractPackingInvoice import AbstractPackingInvoiceClass
+from utils.logger import log
 
 
 class Packing(AbstractPackingInvoiceClass):
@@ -39,6 +40,7 @@ class Packing(AbstractPackingInvoiceClass):
                 clear_all_input(main.windows_map["packing"], self.values)
             return True
         elif self.event == "_PL_SAVE_BTN_":
+            log(self.record)
             # save the record
             for each in self.values.values():
                 if each != "":

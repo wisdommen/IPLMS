@@ -3,6 +3,7 @@ from src.logic.Financial import Financial
 from src.logic.Packing import Packing
 from src.main.MainApplication import MainApplication
 from src.utils.Utils import update_client_list, load_exist_record, update_admin_table, disable_unnecessary_buttons
+from utils.logger import log
 
 
 class Admin(AbstractPackingInvoiceClass):
@@ -60,10 +61,10 @@ class Admin(AbstractPackingInvoiceClass):
                 # back to admin window
                 flag = True
                 while flag:
-                    event3, values3 = packing.read()
-                    print(event3, values3)
+                    event, values = packing.read()
+                    log(event + " " + str(values))
                     # use iteration to loop again until while loop ended
-                    packing_logic = Packing(main, event3, values3)
+                    packing_logic = Packing(main, event, values)
                     # get if it is going to have next loop
                     flag = packing_logic.run(main)
             elif self.event == "_AD_EDIT_IN_BTN_":
@@ -82,10 +83,10 @@ class Admin(AbstractPackingInvoiceClass):
                 # back to admin window
                 flag = True
                 while flag:
-                    event3, values3 = financial.read()
-                    print(event3, values3)
+                    event, values = financial.read()
+                    log(event + " " + str(values))
                     # use iteration to loop again until while loop ended
-                    financial_logic = Financial(main, event3, values3)
+                    financial_logic = Financial(main, event, values)
                     # get if it is going to have next loop
                     flag = financial_logic.run(main)
             # update the admin table even if there is no change

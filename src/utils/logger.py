@@ -1,9 +1,16 @@
 import logging
+import os
 from datetime import datetime
+from os.path import dirname, exists
 
 # set the log file name, ensure there won't be any duplicated name with time stamp
 # ":" can't appear in the name, otherwise it will generate error; avoid double "." in the name
-file_name = str(datetime.now()).replace(":", "").split(".")[0] + ".log"
+file_name = os.getcwd() + "/log/" + str(datetime.now()).replace(":", "").split(".")[0] + ".log"
+
+# create file if not exists
+log_dir = dirname(file_name)
+if not exists(log_dir):
+    os.makedirs(log_dir)
 
 # create logger with 'main'
 logger = logging.getLogger('main')
@@ -11,9 +18,8 @@ logger = logging.getLogger('main')
 # set logger to DEBUG mode
 logger.setLevel(logging.DEBUG)
 
-# create file handler which logs even debug messages, and delay it until the first log message appear, means it will
-# not generate an empty log file if the user is not in a test mode
-fh = logging.FileHandler(file_name, delay=True)
+# create file handler which logs even debug messages
+fh = logging.FileHandler(file_name)
 fh.setLevel(logging.DEBUG)
 
 # set the format of out put
@@ -23,23 +29,18 @@ fh.setFormatter(formatter)
 logger.addHandler(fh)
 
 
-def log(string: str, test=False) -> None:
+def log(string: str) -> None:
     """ Using this method instead of the Python "print" method will give you a way to output the log to a local
     .log file
 
     Args:
         string: a string that needs to be logged
-        test: a boolean, if the method is run under test condition, if not specifics will be false
 
     Returns: void
 
     """
-    if test:
-        # In test condition
-        # out put the message to logger
-        logger.info(string)
-        # still display message to console
-        print(string)
-    else:
-        # only print to console
-        print(string)
+
+    # out put the message to logger
+    logger.info(string)
+    # still display message to console
+    print(string)
