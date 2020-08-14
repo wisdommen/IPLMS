@@ -182,17 +182,21 @@ def disable_unnecessary_buttons(window: Window, keys: list) -> None:
         window[each].Update(disabled=True)
 
 
-def validate_input(window_ui: UI, field_map: map, values: map) -> list:
+def validate_input(window_ui: UI, field_map: map, values: map, data_map=None, client_id="") -> list:
     """ This method check validation of the input fields of a window.
 
     Args:
         window_ui: a UI object which inherits from UI class.
         field_map: a map contains all fields in the window and matched header in the data map.
         values: a map that contains the field keys and value inputs.
+        data_map: the data map only used when validate client data
+        client_id: a string id of the client only used when validate client data
 
     Returns: a list of fields which are not valid with mark and tips.
 
     """
+    if data_map is None:
+        data_map = {}
     results = []
     fields = window_ui.get_need_validate_fields()
     for each in fields.keys():
@@ -201,7 +205,15 @@ def validate_input(window_ui: UI, field_map: map, values: map) -> list:
             results.append("In %s: Empty input" % field_map[each])
             continue
         validate_rule = fields[each]
-        if "_DATE_" in each:
+        # validate the client name, client name should not be duplicate
+        if each == "_CP_NAME_IP_":
+            for i in data_map:
+                if input_value == i["Client Name"] and client_id != i["Client ID"]:
+                    results.append("In Client Name: Duplicate client name! \n"
+                                   "       Please enter a different client name")
+            continue
+        # validate the date
+        elif "_DATE_" in each:
             if re.search(validate_rule, input_value) is None:
                 results.append("In Data and Time: Invalid Date or Time Format! \n"
                                "       Please enter in this format YYYY-MM-DD HH:MM:SS")

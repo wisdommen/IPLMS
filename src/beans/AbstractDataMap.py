@@ -97,6 +97,3 @@ class DataMap(object):
             # If the get permissionError means the file can't be wrote
             except PermissionError:
                 return False
-
-
-# TODO use the client id in the pck_data instead of client name

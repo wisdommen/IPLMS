@@ -6,6 +6,7 @@ from src.utils.Utils import load_record, validate_input
 class Client(AbstractLogicClass):
     def __init__(self, main, event, values):
         super().__init__()
+        self.main = main
         self.data_map = main.client_data_obj.data_map
         self.event = event
         self.values = values
@@ -26,7 +27,7 @@ class Client(AbstractLogicClass):
         # method of save record
         if self.event == "_CP_SAVE_BTN_":
             # check validation
-            result = validate_input(main.client_ui, field_data, self.values)
+            result = validate_input(main.client_ui, field_data, self.values, self.data_map, main.windows_map["client"]["_CLIENT_ID_"].DisplayText)
             if len(result) > 0:
                 string_builder = ""
                 for each in result:
@@ -36,13 +37,13 @@ class Client(AbstractLogicClass):
                 event, values = main.windows_map["client"].read()
                 self.event = event
                 self.values = values
-                self.run(main)
+                return self.run(main)
             self.save(main, field_data)
             # show message box
             main.mg.show_info_box("Record Saved!")
             return self.values.get("_CP_NAME_IP_", "")
         # method of cancel button pressed (actually do nothing)
-        elif self.event == "_CP_CANCEL_BTN":
+        elif self.event == "_CP_CANCEL_BTN_":
             return ""
         elif self.event == "Open":
             # load the record from existing database

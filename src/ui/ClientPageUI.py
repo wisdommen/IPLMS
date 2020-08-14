@@ -45,7 +45,7 @@ class Client_UI(UI):
             [sg.Button(image_data=save_btn_ioc, border_width=0, size=(20, 1), button_color=("black", "light gray"),
                        key="_CP_SAVE_BTN_"),
              sg.Button(image_data=cancel_btn_ioc, border_width=0, size=(20, 1), button_color=("black", "light gray"),
-                       key="_CP_CANCEL_BTN")]
+                       key="_CP_CANCEL_BTN_")]
         ]
 
         column_all = [
@@ -63,4 +63,9 @@ class Client_UI(UI):
     # Overriding method
     def get_need_validate_fields(self):
         # documentation see abstract class
-        return {"_CP_PHONE_IP_": "[^0-9 +]"}
+        return {
+            "_CP_PHONE_IP_": "[^0-9 +]",
+            # only tell the validator to validate the name by its own way, so no rule apply here
+            # or any rule here, does not matter.
+            "_CP_NAME_IP_": ""
+        }
