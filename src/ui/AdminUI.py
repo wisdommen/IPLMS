@@ -43,16 +43,18 @@ class Admin_UI(UI):
         ]
 
         buttons2 = [
-            [sg.Button("Open by Excel", pad=(10, 1), size=(13, 1), button_color=("black", "light gray"),
-                       key="_AD_OPEN_BTN_"),
+            [
+                # sg.Button("Open by Excel", pad=(10, 1), size=(13, 1), button_color=("black", "light gray"),
+                #        key="_AD_OPEN_BTN_"),
              sg.Button("Edit Packing List", pad=(10, 1), size=(13, 1), button_color=("black", "light gray"), key="_AD_EDIT_PL_BTN_"),
              sg.Button("Edit Invoice", pad=(10, 1), size=(13, 1), button_color=("black", "light gray"), key="_AD_EDIT_IN_BTN_"),
              sg.Button("Delete", pad=(10, 1), size=(13, 1), button_color=("black", "light gray"), key="_AD_DEL_BTN_")]
         ]
 
         buttons = [
-            [sg.Button("User Group Management", pad=(20, 1), size=(20, 1), button_color=("black", "light gray"),
-                       key="_AD_UGM_BTN_", disabled=True),
+            [
+                # sg.Button("User Group Management", pad=(20, 1), size=(20, 1), button_color=("black", "light gray"),
+                #        key="_AD_UGM_BTN_", disabled=True),
              sg.Button("Quit", pad=(20, 1), size=(20, 1), button_color=("black", "light gray"), key="_AD_QUIT_BTN_")]
         ]
 

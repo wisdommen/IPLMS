@@ -16,8 +16,7 @@ class UserManage(AbstractUserManagementClass):
 
         if self.event == "_UM_CREATE_BTN_":
             new_user = main.create_window("new_user", "IPLMS",
-                                          main.new_user_ui.get_layout(),
-                                          disable_close=True)
+                                          main.new_user_ui.get_layout())
             new_user.un_hide()
             new_user.bring_to_front()
             event, values = new_user.read()

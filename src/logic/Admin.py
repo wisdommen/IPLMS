@@ -84,9 +84,9 @@ class Admin(AbstractPackingInvoiceClass):
                 flag = True
                 while flag:
                     event, values = financial.read()
-                    log(event + " " + str(values))
                     # use iteration to loop again until while loop ended
                     financial_logic = Financial(main, event, values)
+                    log(event + " " + str(values))
                     # get if it is going to have next loop
                     flag = financial_logic.run(main)
             # update the admin table even if there is no change
@@ -175,7 +175,7 @@ class Admin(AbstractPackingInvoiceClass):
         order = "ASC"
         if condition == "":
             # show condition show not be empty
-            main.mg.show_warning_box("Search condition should not be empty!")
+            main.mg.show_warning_box("Filter condition should not be empty!")
             return self.data_map
         # get the sort order (Ascending or Descending)
         if "(" in condition:

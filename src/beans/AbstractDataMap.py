@@ -64,7 +64,7 @@ class DataMap(object):
         # Make the data folder if the folder is not exists
         self.make_dirs()
         # save the default csv file into the data folder which only include header
-        with open(self.get_file_path(self._file_name), "w") as f:
+        with open(self.get_file_path(self._file_name), "w", encoding="utf8") as f:
             writer = csv.writer(f)
             writer.writerow(self.header)
 

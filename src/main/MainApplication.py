@@ -83,7 +83,7 @@ class MainApplication(metaclass=ABCMeta):
 
     windows_map = {}
 
-    def create_window(self, window_id: str, window_name: str, layout: list, size=(0, 0), disable_close=False) -> Window:
+    def create_window(self, window_id: str, window_name: str, layout: list, size=(0, 0), disable_close=True) -> Window:
         """ This method creates a window if not exists and stores it into the windows map, or returns a window if
         already exists.
 

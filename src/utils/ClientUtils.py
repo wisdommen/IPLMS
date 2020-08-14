@@ -13,15 +13,14 @@ def create_new_client(main: MainApplication) -> str:
     Returns: A string of the client name
 
     """
-    client = main.create_window("client", "IPLMS", main.client_ui.get_layout(), disable_close=True)
+    client = main.create_window("client", "IPLMS", main.client_ui.get_layout())
     client["_CLIENT_ID_"].Update(getUUID())
     client["_CP_NAME_IP_"].Update("")
     client["_CP_PHONE_IP_"].Update("")
     client["_CP_ADDRESS_IP_"].Update("")
     client.un_hide()
-    event4, values4 = client.read()
-    log(event4 + " " + values4)
-    client_logic = Client(main, event4, values4)
+    event, values = client.read()
+    client_logic = Client(main, event, values)
     name = client_logic.run(main)
     client.hide()
     return name
