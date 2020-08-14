@@ -19,7 +19,7 @@ logger = logging.getLogger('main')
 logger.setLevel(logging.DEBUG)
 
 # create file handler which logs even debug messages
-fh = logging.FileHandler(file_name)
+fh = logging.FileHandler(file_name, encoding="utf8")
 fh.setLevel(logging.DEBUG)
 
 # set the format of out put
