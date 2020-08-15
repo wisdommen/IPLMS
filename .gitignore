@@ -220,3 +220,4 @@ src/logic/__pycache__/
 src/main/__pycache__/
 src/ui/__pycache__/
 src/utils/__pycache__/
+!/src.zip

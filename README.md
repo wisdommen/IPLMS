@@ -15,3 +15,4 @@ If you meet any problem like above, please contact me on Teams.
   
   Explanation: Because of the time constrain, I decided not to implement any further about user group. I will finish them in the future. Such as add user group, modify user group and block user group.
   
+- More things are addressed in the journal under doc folder
